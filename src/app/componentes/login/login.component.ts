@@ -4,13 +4,16 @@ import { Utilidades } from 'src/app/clases/utiliadades/utilidades';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  nombreUsuarioInput = '';
+  passwordInput = '';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+  iniciarSesion() {
     
   }
 }
