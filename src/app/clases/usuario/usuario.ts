@@ -1,8 +1,8 @@
 export class Usuario {
     nombre:string;
-    clave:string;
-    constructor(nombre:string,clave:string) {
+    password:string;
+    constructor(nombre:string,password:string) {
         this.nombre = nombre;
-        this.clave = clave;
+        this.password = password;
     }
 }

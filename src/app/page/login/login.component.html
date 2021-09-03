@@ -4,6 +4,7 @@
       <h1 class="h3 mb-3 fw-normal text-center">Iniciar Sesión</h1>
       <div class="form-floating mb-3 input-group-sm">
         <input
+          autocomplete="off"
           type="text"
           class="form-control"
           [(ngModel)]="nombreUsuarioInput"
@@ -12,21 +13,27 @@
       </div>
       <div class="form-floating">
         <input
+          autocomplete="off"
           type="password"
           class="form-control"
-          placeholder="Password"
           [(ngModel)]="passwordInput"
         />
         <label for="floatingPassword">Contraseña</label>
       </div>
 
       <button
-        class="w-100 btn btn-lg btn-primary"
+        class="w-100 btn btn-lg btn-primary mt-5 mb-3"
         type="submit"
-        routerLink="/home"
         (click)="iniciarSesion()"
       >
         Iniciar Sesión
+      </button>
+      <button
+        class="w-100 btn btn-lg btn-primary"
+        type="submit"
+        routerLink="/registrarse" routerLinkActive="active"
+      >
+        Registrarse
       </button>
       <p class="mt-5 mb-3 text-muted text-center">&copy; 2017–2021</p>
     </div>
