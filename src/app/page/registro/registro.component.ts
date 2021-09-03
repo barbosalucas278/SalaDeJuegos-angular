@@ -12,12 +12,14 @@ import { UserService } from 'src/app/services/user.service';
 export class RegistroComponent implements OnInit {
   nombreUsuarioNew = '';
   passwordNew = '';
+  emailNew ='';
   constructor(private route: Router, private userService: UserService) {}
 
   ngOnInit(): void {}
   registrarse() {
     this.userService.currentUser.Nombre = this.nombreUsuarioNew;
     this.userService.currentUser.Password = this.passwordNew;
+    this.userService.currentUser.Email = this.emailNew;
     if (true) {
       this.userService.hasLoggedOn = true;
       setTimeout(() => {
