@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/clases/usuario/usuario';
+import { Utilidades } from 'src/app/clases/utiliadades/utilidades';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,18 +12,18 @@ import { UserService } from 'src/app/services/user.service';
 export class RegistroComponent implements OnInit {
   nombreUsuarioNew = '';
   passwordNew = '';
-  usuario: Usuario;
-  constructor(private route: Router, private userService: UserService) {
-    this.usuario = new Usuario('', '');
-  }
+  constructor(private route: Router, private userService: UserService) {}
 
   ngOnInit(): void {}
   registrarse() {
-    this.usuario.nombre = this.nombreUsuarioNew;
-    this.usuario.password = this.nombreUsuarioNew;
-    this.userService.currentUser = this.usuario;
+    this.userService.currentUser.Nombre = this.nombreUsuarioNew;
+    this.userService.currentUser.Password = this.passwordNew;
     if (true) {
-      this.route.navigate(['home']);
+      this.userService.hasLoggedOn = true;
+      setTimeout(() => {
+        Utilidades.renderNavBarLinks(this.userService.hasLoggedOn);
+        this.route.navigate(['home']);
+      }, 2000);
     }
   }
 }

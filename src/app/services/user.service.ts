@@ -5,8 +5,14 @@ import { Usuario } from '../clases/usuario/usuario';
   providedIn: 'root',
 })
 export class UserService {
+  hasLoggedOn: boolean;
   currentUser: Usuario;
   constructor() {
-    this.currentUser = new Usuario("","");
+    this.currentUser = new Usuario('', '');
+    this.hasLoggedOn = false;
+  }
+  setUser(nombre:string,password:string){
+    this.currentUser.Nombre = nombre;
+    this.currentUser.Password = password;
   }
 }

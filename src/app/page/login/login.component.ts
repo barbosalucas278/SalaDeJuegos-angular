@@ -13,14 +13,16 @@ export class LoginComponent implements OnInit {
   nombreUsuarioInput = '';
   passwordInput = '';
 
-  constructor(private router: Router, private userService:UserService) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit(): void {}
   iniciarSesion() {
-    this.userService.currentUser.nombre = this.nombreUsuarioInput;
-    this.userService.currentUser.password = this.passwordInput;
+    this.userService.setUser(this.nombreUsuarioInput, this.passwordInput);
     setTimeout(() => {
-      this.router.navigate(['home']); 
+      this.userService.hasLoggedOn = true;
+      Utilidades.renderNavBarLinks(this.userService.hasLoggedOn);
+      this.router.navigate(['home']);
     }, 2000);
   }
+  
 }

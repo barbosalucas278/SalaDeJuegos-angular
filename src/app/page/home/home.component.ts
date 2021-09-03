@@ -12,7 +12,6 @@ export class HomeComponent implements OnInit {
   userActual: Usuario;
   constructor(private userService: UserService) {
     this.userActual = userService.currentUser;
-    console.log(userService.currentUser)
   }
 
   ngOnInit(): void {}
