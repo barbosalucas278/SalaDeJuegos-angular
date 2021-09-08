@@ -1,0 +1,79 @@
+<header
+  class="
+    row
+    bg-light
+    justify-content-center justify-content-md-between justify-content-lg-between
+    fixed-top
+  "
+>
+  <div class="col-12 col-sm-5 col-md-4">
+    <img
+      id="logoLayout"
+      routerLink="/home"
+      src="./assets/logo.png"
+      class="img-fluid rounded mx-auto d-block"
+      alt="logo"
+    />
+    <h1 class="text-center">Sala de juegos</h1>
+  </div>
+  <div class="col-12 col-sm-8 col-md-8">
+    <div class="col-md-11">
+      <nav
+        class="
+          navbar navbar-expand-md
+          mt-md-5
+          navbar-light
+          justify-content-center
+          rounded
+        "
+      >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo01"
+          aria-controls="navbarTogglerDemo01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="bi-list" style="font-size: 2rem"></i>
+        </button>
+        <div
+          class="navbar-collapse collapse justify-content-end"
+          id="navbarTogglerDemo01"
+        >
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link fs-5 ms-3"
+                routerLink="/home"
+                routerLinkActive="active"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link fs-5 ms-3"
+                routerLink="/about"
+                routerLinkActive="active"
+                >Sobre mí</a
+              >
+            </li>
+            <li class="nav-item" *ngIf="hasLogged === false">
+              <a class="nav-link fs-5 ms-3">Registrarse</a>
+            </li>
+            <li class="nav-item" *ngIf="hasLogged === false">
+              <a class="nav-link fs-5 ms-3">Login</a>
+            </li>
+            <li class="nav-item" *ngIf="hasLogged === true">
+              <a class="nav-link fs-5 ms-3">Perfil</a>
+            </li>
+            <li class="nav-item" *ngIf="hasLogged === true">
+              <a class="nav-link fs-5 ms-3">Cerrar sesión</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>

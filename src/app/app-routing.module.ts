@@ -1,12 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AboutComponent } from './page/about/about.component';
-import { ErrorComponent } from './page/error/error.component';
-import { HomeComponent } from './page/home/home.component';
-import { LoginComponent } from './page/login/login.component';
-import { LogoutComponent } from './page/logout/logout.component';
-import { PerfilComponent } from './page/perfil/perfil.component';
-import { RegistroComponent } from './page/registro/registro.component';
+import { ErrorComponent } from './components/layout/error/error.component';
+import { AboutComponent } from './pages/about/about.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
@@ -15,33 +11,17 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'registrarse',
-    component: RegistroComponent,
-  },
-  {
     path: 'home',
     component: HomeComponent,
   },
   {
     path: 'about',
     component: AboutComponent,
-  },  
-  {
-    path: 'logout',
-    component: LogoutComponent,
-  },
-  {
-    path: 'perfil',
-    component: PerfilComponent,
   },
   {
     path: '**',
     component: ErrorComponent,
-  }
+  },
 ];
 
 @NgModule({

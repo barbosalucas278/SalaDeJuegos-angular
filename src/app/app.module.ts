@@ -3,36 +3,47 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './page/login/login.component';
-import { HomeComponent } from './page/home/home.component';
-import { AboutComponent } from './page/about/about.component';
-import { FormsModule } from '@angular/forms';
-import { ErrorComponent } from './page/error/error.component';
-import { MenuNavBarComponent } from './componentes/menu-nav-bar/menu-nav-bar.component';
-import { FooterComponent } from './componentes/footer/footer.component';
-import { RegistroComponent } from './page/registro/registro.component';
-import { PerfilComponent } from './page/perfil/perfil.component';
-import { LogoutComponent } from './page/logout/logout.component';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+//Firebase Region
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { environment } from '../environments/environment';
+import { HomeComponent } from './pages/home/home.component';
+import { AboutComponent } from './pages/about/about.component';
+import { AuthComponent } from './pages/auth/auth.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
+import { HeaderComponent } from './components/layout/header/header.component';
+import { FooterComponent } from './components/layout/footer/footer.component';
+import { ErrorComponent } from './components/layout/error/error.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { LogoutComponent } from './components/auth/logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     HomeComponent,
     AboutComponent,
-    ErrorComponent,
-    MenuNavBarComponent,
-    FooterComponent,
-    RegistroComponent,
+    AuthComponent,
     PerfilComponent,
+    HeaderComponent,
+    FooterComponent,
+    ErrorComponent,
+    RegisterComponent,
+    LoginComponent,
     LogoutComponent
   ],
   imports: [
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
