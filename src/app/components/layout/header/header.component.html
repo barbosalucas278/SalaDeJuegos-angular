@@ -1,4 +1,57 @@
-<header
+<header>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+    <div class="container-fluid">
+      <img
+        id="logoLayout"
+        routerLink="/home"
+        src="./assets/logo.png"
+        class="img-fluid me-3 me-xs-0"
+        alt="logo"
+      />
+      <a class="navbar-brand" href="#">Sala de juegos</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+        aria-controls="navbarCollapse"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+        <ul class="navbar-nav mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home" routerLinkActive="active"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/about" routerLinkActive="active"
+              >Sobre mí</a
+            >
+          </li>
+          <li class="nav-item" *ngIf="hasLogged === false">
+            <a class="nav-link">Registrarse</a>
+          </li>
+          <li class="nav-item" *ngIf="hasLogged === false">
+            <a class="nav-link">Login</a>
+          </li>
+          <li class="nav-item" *ngIf="hasLogged === true">
+            <a class="nav-link">Perfil</a>
+          </li>
+          <li class="nav-item" *ngIf="hasLogged === true">
+            <a class="nav-link">Cerrar sesión</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- <header
   class="
     row
     bg-light
@@ -16,7 +69,7 @@
     />
     <h1 class="text-center">Sala de juegos</h1>
   </div>
-  <div class="col-12 col-sm-8 col-md-8">
+  <div class="col-6">
     <div class="col-md-11">
       <nav
         class="
@@ -76,4 +129,4 @@
       </nav>
     </div>
   </div>
-</header>
+</header> -->
