@@ -26,12 +26,8 @@ export class AuthComponent implements OnInit {
         case 'register':
           this.registerMode = true;
           break;
-        case 'logout':
-          this.authService.logout();
-          this.hasLogout = true;
-          break;
       }
     });
   }
-  
+
 }

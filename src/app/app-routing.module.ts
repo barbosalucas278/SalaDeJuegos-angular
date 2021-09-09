@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LogoutComponent } from './components/auth/logout/logout.component';
 import { ErrorComponent } from './components/layout/error/error.component';
 import { AboutComponent } from './pages/about/about.component';
 import { AuthComponent } from './pages/auth/auth.component';
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'auth/:action',
     component: AuthComponent,
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent,
   },
   {
     path: '**',

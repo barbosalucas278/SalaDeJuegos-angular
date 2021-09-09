@@ -43,7 +43,7 @@
             <a class="nav-link">Perfil</a>
           </li>
           <li class="nav-item" *ngIf="hasLogged === true">
-            <a class="nav-link" (click)="onLogout()">Cerrar sesión</a>
+            <a class="nav-link" routerLink="/logout">Cerrar sesión</a>
           </li>
         </ul>
       </div>
