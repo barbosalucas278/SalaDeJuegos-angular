@@ -34,16 +34,16 @@
             >
           </li>
           <li class="nav-item" *ngIf="hasLogged === false">
-            <a class="nav-link">Registrarse</a>
+            <a class="nav-link" (click)="onRegister()">Registrarse</a>
           </li>
           <li class="nav-item" *ngIf="hasLogged === false">
-            <a class="nav-link">Login</a>
+            <a class="nav-link" (click)="onLogin()">Login</a>
           </li>
           <li class="nav-item" *ngIf="hasLogged === true">
             <a class="nav-link">Perfil</a>
           </li>
           <li class="nav-item" *ngIf="hasLogged === true">
-            <a class="nav-link">Cerrar sesión</a>
+            <a class="nav-link" (click)="onLogout()">Cerrar sesión</a>
           </li>
         </ul>
       </div>

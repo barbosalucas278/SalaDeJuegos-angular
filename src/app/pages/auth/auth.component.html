@@ -1,1 +1,3 @@
-<p>auth works!</p>
+<app-register *ngIf="registerMode == true && hasLogout == false"></app-register>
+<app-login *ngIf="registerMode == false"></app-login>
+<app-logout *ngIf="hasLogout == true"></app-logout>
