@@ -50,4 +50,25 @@ export class LoginComponent implements OnInit {
         });
     }
   }
+  onTest() {
+    this.authService
+      .login('test@test.com', 'Test1234')
+      .then(() => {
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 2000);
+      })
+      .catch((error) => {
+        this.checkError = true;
+        switch (error.code) {
+          case 'auth/user-not-found':
+            this.errorMessage = `Ocurrio un problema`;
+            break;
+        }
+        setTimeout(() => {
+          this.checkError = false;
+          this.errorMessage = ``;
+        }, 4000);
+      });
+  }
 }

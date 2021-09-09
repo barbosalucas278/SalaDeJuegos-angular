@@ -33,11 +33,8 @@ export class AuthService {
       });
   }
   async logout() {
-    this.auth.signOut().then((event) => {
-      console.log(event);
-
+    this.auth.signOut().then(() => {
       this.userHasLogoutEvent.emit(true);
-      console.log(this.currenUser);
     });
   }
   setHasLogged(condition: boolean) {
