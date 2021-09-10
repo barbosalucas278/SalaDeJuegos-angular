@@ -1,7 +1,8 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { FirebaseApp } from '@angular/fire/compat';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User } from '../class/user';
+import { UserModel } from '../class/user-model';
+import { LogService } from './log/log.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,15 +12,16 @@ export class AuthService {
   userHasLogoutEvent: EventEmitter<boolean> = new EventEmitter();
   hasLogged: boolean = false;
   currenUser?: any;
-  constructor(private auth: AngularFireAuth) {}
+  constructor(private auth: AngularFireAuth, private logService: LogService) {}
 
   login(email: string, password: string) {
     return this.auth
       .signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
+      .then(async (userCredential) => {
+        const user = userCredential.user!;
         this.currenUser = user;
         this.setHasLogged(true);
+        this.saveLogUser(user);
       });
   }
   async register(newUser: User) {
@@ -34,11 +36,16 @@ export class AuthService {
   }
   async logout() {
     this.auth.signOut().then(() => {
-      this.userHasLogoutEvent.emit(true);
+      this.setHasLogged(false);
     });
   }
   setHasLogged(condition: boolean) {
     this.hasLogged = condition;
     this.statusUserChangedEvent.emit(condition);
+  }
+  async saveLogUser(user: import('firebase/compat').default.User) {
+    const fecha = new Date();
+    const userModel = new UserModel(user.displayName!, user.email!, fecha);
+    await this.logService.saveCollectionLog(userModel);
   }
 }
