@@ -11,7 +11,7 @@ export class AuthService {
   statusUserChangedEvent: EventEmitter<boolean> = new EventEmitter();
   userHasLogoutEvent: EventEmitter<boolean> = new EventEmitter();
   hasLogged: boolean = false;
-  currenUser?: any;
+  currenUser?: User;
   constructor(private auth: AngularFireAuth, private logService: LogService) {}
 
   login(email: string, password: string) {
@@ -19,14 +19,14 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(async (userCredential) => {
         const user = userCredential.user!;
-        this.currenUser = user;
+        this.currenUser = new User(user.displayName!,user.email!);
         this.setHasLogged(true);
         this.saveLogUser(user);
       });
   }
   async register(newUser: User) {
     return this.auth
-      .createUserWithEmailAndPassword(newUser.email, newUser.password)
+      .createUserWithEmailAndPassword(newUser.email, newUser.password!)
       .then(() => {
         this.auth.currentUser.then((user) => {
           user?.updateProfile({ displayName: newUser.nick });

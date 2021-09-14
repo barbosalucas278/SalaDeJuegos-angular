@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.nombreUsuario = this.authService.currenUser?.displayName;
+    this.nombreUsuario = this.authService.currenUser?.nick!;
     console.log(this.hasLogged);
     this.hasLogged = this.authService.hasLogged;
     console.log(this.hasLogged);
