@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         .login(email, password)
         .then(() => {
           setTimeout(() => {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/juegos']);
           }, 2000);
         })
         .catch((error) => {
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
       .login('test@test.com', 'Test1234')
       .then(() => {
         setTimeout(() => {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/juegos']);
         }, 2000);
       })
       .catch((error) => {

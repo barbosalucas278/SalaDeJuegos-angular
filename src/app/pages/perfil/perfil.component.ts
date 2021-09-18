@@ -13,9 +13,6 @@ currentUser?: User;
 
   ngOnInit(): void {
     this.currentUser = this.authService.currenUser;
-    console.log(this.authService.currenUser!.nick);
-    console.log(this.authService.currenUser!.email);
-    
   }
 
 }

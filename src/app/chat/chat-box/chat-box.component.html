@@ -1,0 +1,28 @@
+<div class="row no-gutters">
+  <div class="col-xl-12 col-lg-8 col-md-8 col-sm-9 col-12">
+    <div class="selected-user text-center">
+      <span class="name">Sala de Chat</span>
+    </div>
+    <!-- start area chat box container-->
+    <div class="chat-container bg-info">
+      <!-- start area list of message -->
+      <app-chat-list-message [listOfMessage]="listOfMessage"></app-chat-list-message>
+      <!-- end area list of message -->
+      <!-- start area input message -->
+      <div class="row justify-content-center">
+        <div class="form-group mb-0 col-10">
+          <textarea          
+            class="form-control"
+            rows="2"
+            placeholder="Escriba su mensaje aquí..."
+            [(ngModel)]="newMessage"
+          ></textarea>
+        </div>
+        <div class="col-1">
+          <button (click)="enviarMensaje()"><i class="bi bi-caret-right-fill"></i></button>
+        </div>
+      </div>
+      <!-- end area input message -->
+    </div>
+  </div>
+</div>

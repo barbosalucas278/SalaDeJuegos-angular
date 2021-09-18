@@ -1,0 +1,7 @@
+<ul class="chat-box">
+  <app-chat-message
+    *ngFor="let message of listOfMessage"
+    [message]="message"
+    [ngClass]="'chat-right'"
+  ></app-chat-message>
+</ul>

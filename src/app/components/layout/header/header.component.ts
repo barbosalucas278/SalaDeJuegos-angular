@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   hasLogged: boolean;
+  emailCurrentUsuario?: string;
   constructor(private authService: AuthService, private router: Router) {
     this.hasLogged = this.authService.hasLogged;
   }
@@ -16,6 +17,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.authService.statusUserChangedEvent.subscribe((condition) => {
       this.hasLogged = condition;
+      if(condition){
+        this.emailCurrentUsuario = this.authService.currenUser?.email;
+      }
     });
   }
   onLogin() {

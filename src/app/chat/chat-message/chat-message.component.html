@@ -1,0 +1,17 @@
+<li [ngClass]="positionMessage">
+  <div class="chat-avatar">
+    <img
+      class="img-fluid"
+      src="https://www.bootdey.com/img/Content/avatar/avatar3.png"
+      alt="Retail Admin"
+    />
+    <div class="chat-name">{{ message?.userNickName }}</div>
+  </div>
+  <div class="chat-text">
+    {{ message?.userMessage }}
+  </div>
+  <div class="chat-hour">
+    {{ message?.hourMessage | date: "hh:mm" }}
+    <span class="fa fa-check-circle"></span>
+  </div>
+</li>

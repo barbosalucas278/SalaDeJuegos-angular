@@ -25,11 +25,13 @@ export class AuthService {
       });
   }
   async register(newUser: User) {
+    
     return this.auth
       .createUserWithEmailAndPassword(newUser.email, newUser.password!)
       .then(() => {
         this.auth.currentUser.then((user) => {
           user?.updateProfile({ displayName: newUser.nick });
+          this.currenUser = new User(newUser.nick,user?.email!);
         });
         this.setHasLogged(true);
       });

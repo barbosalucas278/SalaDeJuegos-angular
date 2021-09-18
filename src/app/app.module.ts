@@ -21,6 +21,8 @@ import { ErrorComponent } from './components/layout/error/error.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { LogoutComponent } from './components/auth/logout/logout.component';
+import { JuegosModule } from './juegos/juegos.module';
+import { ChatModule } from './chat/chat.module';
 
 @NgModule({
   declarations: [
@@ -40,9 +42,11 @@ import { LogoutComponent } from './components/auth/logout/logout.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
+    JuegosModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
+    AngularFirestoreModule,  
+    ChatModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
