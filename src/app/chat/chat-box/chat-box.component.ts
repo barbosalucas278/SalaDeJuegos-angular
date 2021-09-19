@@ -17,13 +17,24 @@ export class ChatBoxComponent implements OnInit {
   listOfMessage: ChatMessage[] = [];
   newMessage: string = '';
   constructor(private chatService: ChatService) {
+    console.log('Inicio dle constructor antes de setear la lista');
+    console.log(this.listOfMessage);
     this.listOfMessage = this.chatService.listOfMessage;
+    console.log('Inicio dle constructor despues de setear la lista');
+    console.log(this.listOfMessage);
     chatService.listUpdateEvent.subscribe((list) => {
+      console.log('Lista antes de actualizar con el evento listUpdateEvent');
+      console.log(this.listOfMessage);
+
       this.listOfMessage = list;
+      console.log('Lista despues de actualizar con el evento listUpdateEvent');
+      console.log(this.listOfMessage);
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.chatService.identificarMensajesDelCurrentUser();
+  }
   enviarMensaje() {
     const newChatMessage = new ChatMessage(
       this.currentUser!.nick,
@@ -32,7 +43,7 @@ export class ChatBoxComponent implements OnInit {
       this.currentUser!.email
     );
     this.newMessage = '';
-    
+
     this.chatService.addNewMessage(newChatMessage);
   }
 }

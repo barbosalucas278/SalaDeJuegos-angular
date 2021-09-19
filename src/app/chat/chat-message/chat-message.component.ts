@@ -7,15 +7,15 @@ import { ChatMessage } from '../class/chat-message';
   styleUrls: ['./chat-message.component.scss'],
 })
 export class ChatMessageComponent implements OnInit {
-  positionMessage: string;
+  positionMessage: string = '';
   @Input() message?: ChatMessage;
-  constructor() {
-    this.positionMessage = 'chat-left';
-  }
+  constructor() {}
 
   ngOnInit(): void {
     if (this.message?.isUserMessage) {
       this.positionMessage = 'chat-right';
+    } else {
+      this.positionMessage = 'chat-left';
     }
   }
 }

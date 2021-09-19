@@ -13,14 +13,10 @@ export class ChatService {
     private db: AngularFireDatabase,
     private authService: AuthService
   ) {
-    const listRef = this.db.list<string>('mensajes');
+    const listRef = this.db.list<string>('mensajes');    
     listRef.valueChanges().subscribe((data) => {
       this.listOfMessage = data.map((m) => JSON.parse(m));
-      this.listOfMessage.map((m) => {
-        if (m.userEmail == authService.currenUser?.email) {
-          m.isUserMessage = true;
-        }
-      });
+      this.identificarMensajesDelCurrentUser();
       this.listUpdateEvent.emit(this.listOfMessage);
     });
   }
@@ -28,5 +24,14 @@ export class ChatService {
     const listOfMessageDB = this.db.list('mensajes');
     listOfMessageDB.push(JSON.stringify(newMessage));
     this.listUpdateEvent.emit(this.listOfMessage);
+  }
+  identificarMensajesDelCurrentUser(){
+    this.listOfMessage.map((m) => {
+      if (m.userEmail == this.authService.currenUser?.email) {
+        m.isUserMessage = true;
+      }else{
+        m.isUserMessage = false;
+      }
+    });
   }
 }

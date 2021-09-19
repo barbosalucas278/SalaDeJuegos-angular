@@ -29,7 +29,7 @@ li.chat-right > .chat-avatar {
 
 li .chat-name {
   font-size: 0.75rem;
-  color: #999999;
+  color: #000000;
   text-align: center;
 }
 
@@ -42,6 +42,7 @@ li .chat-text {
   font-weight: 300;
   line-height: 150%;
   position: relative;
+  max-width: 80%;
 }
 
 li .chat-text:before {
