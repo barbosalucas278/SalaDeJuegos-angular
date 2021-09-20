@@ -1,13 +1,58 @@
-<li [ngClass]="positionMessage">
-  <div class="chat-avatar">
-    <i class="bi bi-person-circle"></i>
-    <div class="chat-name">{{ message?.userNickName }}</div>
-  </div>
-  <div class="chat-text">
-    {{ message?.userMessage }}
-  </div>
-  <div class="chat-hour">
-    {{ message?.hourMessage | date: "hh:mm" }}
-    <span class="fa fa-check-circle"></span>
+<li *ngIf="isUserMessage === false; else elseBlock" class="text-left mb-1">
+  <div class="row justify-content-start">
+    <div class="col-9">
+      <div class="row">
+        <div class="col-3 chat-avatar text-center">
+          <span>
+            <i class="bi bi-person-circle"></i>
+          </span>
+          <div class="chat-name">
+            <span>
+              {{ message?.userNickName }}
+            </span>
+          </div>
+        </div>
+        <div class="col-7 chat-text">
+          <p class="text-break">
+            {{ message?.userMessage }}
+          </p>
+        </div>
+        <div class="col-2 chat-hour align-self-center">
+          <span class="badge rounded-pill">
+            {{ message?.hourMessage | date: "hh:mm" }}
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
 </li>
+<ng-template #elseBlock>
+  <li class="chat-right mb-1">
+    <div class="row justify-content-end">
+      <div class="col-10">
+        <div class="row">
+          <div class="col-2 chat-hour align-self-center">
+            <span class="badge rounded-pill currentUser">
+              {{ message?.hourMessage | date: "hh:mm" }}
+            </span>
+          </div>
+          <div class="col-7 chat-text-current-user">
+            <p class="text-break">
+              {{ message?.userMessage }}
+            </p>
+          </div>
+          <div class="col-3 chat-avatar text-center">
+            <span>
+              <i class="bi bi-person-circle"></i>
+            </span>
+            <div class="chat-name">
+              <span>
+                {{ message?.userNickName }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+</ng-template>
