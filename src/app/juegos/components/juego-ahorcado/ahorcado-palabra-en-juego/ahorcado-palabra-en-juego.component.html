@@ -1,0 +1,10 @@
+<div class="row">
+  <div
+    class="col-1 espacioLibre"
+    *ngFor="let letra of letrasEnJuego; let i = index"
+  >
+    <p class="letraOculta" id="{{ i }}">
+      {{ letra.caracter }}
+    </p>
+  </div>
+</div>

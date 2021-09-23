@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LogoutComponent } from './components/auth/logout/logout.component';
-import { ErrorComponent } from './components/layout/error/error.component';
+import { LogoutComponent } from './pages/components/auth/logout/logout.component';
+import { ErrorComponent } from './pages/components/layout/error/error.component';
 import { AboutComponent } from './pages/about/about.component';
 import { AuthComponent } from './pages/auth/auth.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -18,7 +18,7 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'juegos',
+    path: 'juegos/ListaDeJuegos',
     loadChildren: () => import('./juegos/juegos.module').then(m => m.JuegosModule)
   },
   {

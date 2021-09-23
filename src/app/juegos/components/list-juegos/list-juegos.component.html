@@ -1,0 +1,52 @@
+<div class="container">
+  <h2 class="text-center">Lista de juegos disponibles</h2>
+  <div class="row">
+    <div class="col-12 mb-5 mt-5">
+      <div class="row justify-content-center">
+        <h4 class="col-8 text-white">Ahorcado</h4>
+        <button
+          class="btn btn-success col-2"
+          [routerLink]="['/juegos/Ahorcado']"
+        >
+          Jugar!
+        </button>
+      </div>
+    </div>
+    <div class="col-12 mb-5">
+      <div class="row justify-content-center">
+        <h4 class="col-8 text-white">Mayor o Menor</h4>
+        <button
+          class="btn btn-success col-2"
+          [routerLink]="['/juegos/MayorOMenor']"
+          disabled
+        >
+          Jugar!
+        </button>
+      </div>
+    </div>
+    <div class="col-12 mb-5">
+      <div class="row justify-content-center">
+        <h4 class="col-8 text-white">Preguntados (Próximamente!)</h4>
+        <button
+          class="btn btn-success col-2"
+          [routerLink]="['/juegos/ListaDeJuegos']"
+          disabled
+        >
+          Jugar!
+        </button>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="row justify-content-center">
+        <h4 class="col-8 text-white">Comparación de colores (Próximamente!)</h4>
+        <button
+          class="btn btn-success col-2"
+          [routerLink]="['/juegos/ListaDeJuegos']"
+          disabled
+        >
+          Jugar!
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

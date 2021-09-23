@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         .login(email, password)
         .then(() => {
           setTimeout(() => {
-            this.router.navigate(['/juegos']);
+            this.router.navigate(['/juegos/ListaDeJuegos']);
           }, 2000);
         })
         .catch((error) => {
@@ -55,7 +55,28 @@ export class LoginComponent implements OnInit {
       .login('test@test.com', 'Test1234')
       .then(() => {
         setTimeout(() => {
-          this.router.navigate(['/juegos']);
+          this.router.navigate(['/juegos/ListaDeJuegos']);
+        }, 2000);
+      })
+      .catch((error) => {
+        this.checkError = true;
+        switch (error.code) {
+          case 'auth/user-not-found':
+            this.errorMessage = `Ocurrio un problema`;
+            break;
+        }
+        setTimeout(() => {
+          this.checkError = false;
+          this.errorMessage = ``;
+        }, 4000);
+      });
+  }
+  onTest2() {
+    this.authService
+      .login('test2@test2.com', 'Test21234')
+      .then(() => {
+        setTimeout(() => {
+          this.router.navigate(['/juegos/ListaDeJuegos']);
         }, 2000);
       })
       .catch((error) => {

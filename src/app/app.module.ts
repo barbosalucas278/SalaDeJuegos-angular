@@ -15,14 +15,15 @@ import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
 import { AuthComponent } from './pages/auth/auth.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
-import { HeaderComponent } from './components/layout/header/header.component';
-import { FooterComponent } from './components/layout/footer/footer.component';
-import { ErrorComponent } from './components/layout/error/error.component';
-import { RegisterComponent } from './components/auth/register/register.component';
-import { LoginComponent } from './components/auth/login/login.component';
-import { LogoutComponent } from './components/auth/logout/logout.component';
+import { HeaderComponent } from './pages/components/layout/header/header.component';
+import { FooterComponent } from './pages/components/layout/footer/footer.component';
+import { ErrorComponent } from './pages/components/layout/error/error.component';
+import { RegisterComponent } from './pages/components/auth/register/register.component';
+import { LoginComponent } from './pages/components/auth/login/login.component';
+import { LogoutComponent } from './pages/components/auth/logout/logout.component';
 import { JuegosModule } from './juegos/juegos.module';
-import { ChatModule } from './chat/chat.module';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -42,11 +43,11 @@ import { ChatModule } from './chat/chat.module';
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
+    HttpClientModule,
     JuegosModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,  
-    ChatModule,
+    AngularFirestoreModule,    
   ],
   providers: [],
   bootstrap: [AppComponent],
