@@ -1,9 +1,9 @@
-<div class="row">
+<div class="row" *ngIf="palabraEnJuegoListaParaMostrar()">
   <div
     class="col-1 espacioLibre"
     *ngFor="let letra of letrasEnJuego; let i = index"
   >
-    <p class="letraOculta" id="{{ i }}">
+    <p class="letraOculta" id="l{{ i }}">
       {{ letra.caracter }}
     </p>
   </div>

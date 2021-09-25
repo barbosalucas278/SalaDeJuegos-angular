@@ -22,8 +22,19 @@ export class AhorcadoService {
       this.ceroVidasEvent.emit();
     }
   }
-  getPalabra(): Observable<any> {
-    const url = 'https://palabras-aleatorias-public-api.herokuapp.com/random';
-    return this.http.get<any>(url);
+  getPalabra(){
+    // const url = 'https://palabras-aleatorias-public-api.herokuapp.com/random';
+    // let palabra;
+    // this.http.get(url).subscribe(
+    //   (x: any) => {
+    //     console.log(x.body.Word);
+    //     palabra = new Palabra(x.body.Word);
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
+    // return palabra;
+    return new Palabra("hola");
   }
 }

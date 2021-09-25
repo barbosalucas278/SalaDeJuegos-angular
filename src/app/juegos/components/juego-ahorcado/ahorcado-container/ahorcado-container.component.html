@@ -6,8 +6,6 @@
   <div class="row justify-content-end">
     <div class="col-4">
       <app-ahorcado-vidas
-        [vidas]="vidasRestantes"
-        (compVidasReady)="compVidasIsReady($event)"
       ></app-ahorcado-vidas>
     </div>
   </div>
@@ -15,7 +13,6 @@
     <div class="col-12 mt-5">
       <app-ahorcado-palabra-en-juego
         [letraSeleccionada]="letraSeleccionada"
-        [palabraEnJuego]="palabraEnJuego"
         (letraCorrectaEvent)="actualizarDisplayLetras($event)"
       ></app-ahorcado-palabra-en-juego>
     </div>

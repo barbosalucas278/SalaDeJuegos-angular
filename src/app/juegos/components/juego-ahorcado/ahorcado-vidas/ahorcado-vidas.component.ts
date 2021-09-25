@@ -7,11 +7,12 @@ import { AhorcadoService } from '../services/ahorcado.service';
   styleUrls: ['./ahorcado-vidas.component.scss'],
 })
 export class AhorcadoVidasComponent implements OnInit {
-  @Input() vidas!: number;
-  @Output() compVidasReady: EventEmitter<boolean> = new EventEmitter<boolean>();
-  constructor() {}
-  ngOnInit(): void {}
-  ngAfterViewInit() {
-    this.compVidasReady.emit(true);
+  vidas: Number;
+  constructor(private ahoracadoService: AhorcadoService) {
+    this.vidas = this.ahoracadoService.vidasRestantes;
+    this.ahoracadoService.vidasChangedEvent.subscribe((x) => {
+      this.vidas = x;
+    });
   }
+  ngOnInit(): void {}
 }
