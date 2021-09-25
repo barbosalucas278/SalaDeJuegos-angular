@@ -13,10 +13,14 @@ export class AhorcadoContainerComponent implements OnInit {
   letraSeleccionada?: Letra;
   vidasRestantes!: number;
   vidasReady: boolean;
+  juegoTerminado: boolean;
+  userWin?:boolean;
   constructor(private ahorcadoService: AhorcadoService) {
+    this.juegoTerminado = false;
     this.vidasReady = false;
     this.setVidas();
     this.setPalabraEnJuego();
+    this.subscribeEventCeroVidas();
     console.log(this.palabraEnJuego + ' en ctor');
   }
   setVidas() {
@@ -37,6 +41,11 @@ export class AhorcadoContainerComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  subscribeEventCeroVidas() {
+    this.ahorcadoService.ceroVidasEvent.subscribe(() => {
+      this.juegoTerminado = true;
+    });
   }
   ngOnInit() {}
   actualizarDisplayLetras(letra: Letra) {

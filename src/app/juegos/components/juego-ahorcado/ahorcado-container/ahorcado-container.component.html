@@ -1,12 +1,9 @@
 <div class="container">
-  <div class="row mt-5">
-    <div class="col-8 mt-5">
-      <app-ahorcado-palabra-en-juego
-        [letraSeleccionada]="letraSeleccionada"
-        [palabraEnJuego]="palabraEnJuego"
-        (letraCorrectaEvent)="actualizarDisplayLetras($event)"
-      ></app-ahorcado-palabra-en-juego>
-    </div>
+  <app-ahorcado-resultado-juego
+    [userWin]="userWin"
+    [estadoDelJuego]="juegoTerminado"
+  ></app-ahorcado-resultado-juego>
+  <div class="row justify-content-end">
     <div class="col-4">
       <app-ahorcado-vidas
         [vidas]="vidasRestantes"
@@ -14,7 +11,16 @@
       ></app-ahorcado-vidas>
     </div>
   </div>
-  <div class="row mt-5">
+  <div class="row mt-5 justify-content-center">
+    <div class="col-12 mt-5">
+      <app-ahorcado-palabra-en-juego
+        [letraSeleccionada]="letraSeleccionada"
+        [palabraEnJuego]="palabraEnJuego"
+        (letraCorrectaEvent)="actualizarDisplayLetras($event)"
+      ></app-ahorcado-palabra-en-juego>
+    </div>
+  </div>
+  <div class="row mt-1">
     <div class="col-12 mt-5">
       <app-ahorcado-letras-restantes
         [letraActualizada]="letraSeleccionada"

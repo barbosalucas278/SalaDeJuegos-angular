@@ -1,0 +1,11 @@
+<div class="container" *ngIf="estadoDelJuego">
+  <div class="row">
+    <div class="col-4" *ngIf="userWin">
+      <p>Ganaste!</p>
+    </div>
+
+    <div class="col-4" *ngIf="!userWin">
+      <p>Perdiste!</p>
+    </div>
+  </div>
+</div>

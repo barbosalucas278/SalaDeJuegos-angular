@@ -6,6 +6,7 @@ import { JuegoAhorcadoRoutingModule } from './juego-ahorcado-routing.module';
 import { AhorcadoVidasComponent } from './ahorcado-vidas/ahorcado-vidas.component';
 import { AhorcadoPalabraEnJuegoComponent } from './ahorcado-palabra-en-juego/ahorcado-palabra-en-juego.component';
 import { AhorcadoLetrasRestantesComponent } from './ahorcado-letras-restantes/ahorcado-letras-restantes.component';
+import { AhorcadoResultadoJuegoComponent } from './ahorcado-resultado-juego/ahorcado-resultado-juego.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { AhorcadoLetrasRestantesComponent } from './ahorcado-letras-restantes/ah
     AhorcadoVidasComponent,
     AhorcadoPalabraEnJuegoComponent,
     AhorcadoLetrasRestantesComponent,
+    AhorcadoResultadoJuegoComponent,
   ],
   exports: [AhorcadoContainerComponent, JuegoAhorcadoComponent],
   imports: [CommonModule, JuegoAhorcadoRoutingModule],

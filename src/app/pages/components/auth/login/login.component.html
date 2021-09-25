@@ -9,12 +9,12 @@
             type="email"
             class="form-control"
             formControlName="email"
-          />
-          <label for="floatingPassword">Email</label>
-        </div>
-
-        <div class="form-floating mb-3">
-          <input
+            />
+            <label for="floatingPassword">Email</label>
+          </div>
+          
+          <div class="form-floating mb-3">
+            <input
             autocomplete="off"
             type="password"
             class="form-control"
@@ -23,12 +23,16 @@
           <label for="floatingPassword">Contraseña</label>
         </div>
 
-        <button class="w-100 btn btn-lg btn-primary mt-5" type="submit">
+        <button class="w-100 btn btn-lg btn-primary mt-5" (click)="onSubmit()" [disabled]="this.form.invalid">
           Iniciar
         </button>
-        <button class="w-100 btn btn-lg btn-success mt-5" (click)="onTest()">Iniciar con cuenta Test</button>
-        <button class="w-100 btn btn-lg btn-success mt-5" (click)="onTest2()">Iniciar con cuenta Test2</button>
       </form>
+      <button class="w-100 btn btn-lg btn-success mt-5" (click)="onTest()">
+        Iniciar con cuenta Test
+      </button>
+      <button class="w-100 btn btn-lg btn-success mt-5" (click)="onTest2()">
+        Iniciar con cuenta Test2
+      </button>
     </div>
     <app-error
       class="mt-3"
