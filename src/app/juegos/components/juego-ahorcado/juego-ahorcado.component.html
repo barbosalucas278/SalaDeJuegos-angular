@@ -1,1 +1,13 @@
-<app-ahorcado-container></app-ahorcado-container>
+  <!-- Sector Resultado del juego -->
+  <app-ahorcado-resultado-juego
+    *ngIf="juegoTerminado"
+    [userResultado]="userWin!"
+    (playAgainEvent)="onPlayAgain()"
+  ></app-ahorcado-resultado-juego>
+  <!-------------------------------->
+  <app-ahorcado-container
+    *ngIf="!juegoTerminado"
+    (userWinEvent)="onUserWin($event)"
+    (userLoseEvent)="onUserLose($event)"
+  ></app-ahorcado-container>
+  <!-- <router-outlet></router-outlet> -->
