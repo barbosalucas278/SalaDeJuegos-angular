@@ -1,11 +1,31 @@
-<div class="container" *ngIf="estadoDelJuego">
-  <div class="row">
-    <div class="col-4" *ngIf="userWin">
-      <p>Ganaste!</p>
+<div class="row align-items-center">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-4">
+        <h4>La palabra era:</h4>
+        <h3>
+          {{ userResultado!.palabraEnJuego!.palabra }}
+        </h3>
+      </div>
+      <div class="col-4" *ngIf="userResultado?.userWin">
+        <p>Ganaste!</p>
+        <p>Puntos: {{ cantidadDePuntos }}</p>
+      </div>
+      <div class="col-4" *ngIf="userResultado?.userLose">
+        <p>Perdiste!</p>
+      </div>
     </div>
-
-    <div class="col-4" *ngIf="!userWin">
-      <p>Perdiste!</p>
+    <div class="row justify-content-center mb-3">
+      <div class="col-3">
+        <button class="btn btn-success" (click)="onPlayAgain()">
+          Volver a Jugar
+        </button>
+      </div>
+      <div class="col-3">
+        <button class="btn btn-warning" (click)="onBackToMenu()">
+          Volver al menu
+        </button>
+      </div>
     </div>
   </div>
 </div>

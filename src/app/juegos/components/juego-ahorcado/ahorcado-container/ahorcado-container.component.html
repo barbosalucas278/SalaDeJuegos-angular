@@ -1,28 +1,48 @@
-<div class="container">
-  <app-ahorcado-resultado-juego
-    [userWin]="userWin"
-    [estadoDelJuego]="juegoTerminado"
-  ></app-ahorcado-resultado-juego>
-  <div class="row justify-content-end">
-    <div class="col-4">
-      <app-ahorcado-vidas
-      ></app-ahorcado-vidas>
+<div class="row justify-content-end">
+  <div class="col-4">
+    <!--Sector Vidas------------------>
+    <div class="row">
+      <div class="col-12 bg-success">
+        <div class="row justify-content-center">
+          <div class="col-11">Cantidad de vidas:</div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-2">{{ vidas }}</div>
+        </div>
+      </div>
     </div>
+    <!-------------------------------->
   </div>
-  <div class="row mt-5 justify-content-center">
-    <div class="col-12 mt-5">
-      <app-ahorcado-palabra-en-juego
-        [letraSeleccionada]="letraSeleccionada"
-        (letraCorrectaEvent)="actualizarDisplayLetras($event)"
-      ></app-ahorcado-palabra-en-juego>
+</div>
+<div class="row justify-content-center">
+  <div class="col-12 mt-2">
+    <!-- Sector Palabra en juego -->
+    <div class="row ms-5">
+      <div
+        class="col-1 espacioLibre"
+        *ngFor="let letra of letrasEnJuego; let i = index"
+      >
+        <p class="letraOculta" id="l{{ i }}">
+          {{ letra.caracter }}
+        </p>
+      </div>
     </div>
+    <!----------------------------->
   </div>
-  <div class="row mt-1">
-    <div class="col-12 mt-5">
-      <app-ahorcado-letras-restantes
-        [letraActualizada]="letraSeleccionada"
-        (letraSeleccionadaEvent)="actualizarLetraSeleccionada($event)"
-      ></app-ahorcado-letras-restantes>
+</div>
+<div class="row mt-1">
+  <div class="col-12 mt-5 mb-3">
+    <!-- Sector Display letras -->
+    <div class="row justify-content-center">
+      <div
+        (click)="onLetraSeleccionada($event)"
+        class="col-1 bg-light me-2 mt-1 text-center"
+        *ngFor="let letra of displayLetras; let i = index"
+        id="d{{ i }}"
+      >
+        {{ letra.caracter }}
+      </div>
     </div>
+    <!--------------------------->
   </div>
 </div>
