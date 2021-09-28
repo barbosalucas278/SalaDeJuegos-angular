@@ -1,1 +1,9 @@
-<p>juego-mayor-menor works!</p>
+<app-mayor-menor-resultado-juego
+  *ngIf="juegoTerminado"
+  [userResultado]="resultadoDelJuego!"
+  (playAgainEvent)="onPlayAgain()"
+  ></app-mayor-menor-resultado-juego>
+  <app-mayor-menor-container
+  *ngIf="!juegoTerminado"
+  (userLoseEvent)="onUserLose($event)"
+></app-mayor-menor-container>

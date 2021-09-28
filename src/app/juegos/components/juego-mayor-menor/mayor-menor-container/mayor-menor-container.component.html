@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-10">
+    <div class="row justify-content-center mt-4 ms-3">
+      <div class="col-6" *ngIf="cartaEnJuego">
+        <img
+          src="{{ cartaEnJuego.url }}"
+          alt="Imagen de carta en juego"
+          class="img-fluid img-rounded"
+        />
+      </div>
+      <div class="col-4">
+        <img
+          src="{{ cartaBocaAbajo }}"
+          alt="Imagen de carta dada vuelta"
+          class="img-fluid img-rounded"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <h2 class="text-center" *ngIf="jugadorAcierta">Acertaste!</h2>
+      <h2
+        class="text-center"
+        *ngIf="!jugadorAcierta && jugadorAcierta != undefined"
+      >
+        No has acetado!
+      </h2>
+    </div>
+    <!-------------------------------->
+    <div class="row justify-content-around mt-1" *ngIf="!terminoRonda">
+      <div class="col-2">
+        <button
+          class="btn btn-lg btn-success"
+          (click)="onJugadorEleccion(false)"
+        >
+          Menor
+        </button>
+      </div>
+      <div class="col-2">
+        <button
+          class="btn btn-lg btn-success"
+          (click)="onJugadorEleccion(true)"
+        >
+          Mayor
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!--Sector Vidas------------------>
+  <div class="col-2 bg-success h-25">
+    <div class="row justify-content-center">
+      <div class="col-6">VIDAS</div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-3">{{ vidas }}</div>
+    </div>
+  </div>
+</div>

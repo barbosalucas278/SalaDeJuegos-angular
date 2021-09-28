@@ -15,7 +15,7 @@ const routes: Routes = [
       },
       {
         path: 'MayorOMenor',
-        component: JuegoMayorMenorComponent,
+        loadChildren: () => import('./components/juego-mayor-menor/juego-mayor-menor.module').then(m => m.JuegoMayorMenorModule)
       },
       {
         path: 'Ahorcado',
