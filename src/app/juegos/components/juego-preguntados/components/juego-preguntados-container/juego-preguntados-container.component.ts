@@ -32,7 +32,7 @@ export class JuegoPreguntadosContainerComponent implements OnInit {
       this.vidas = value;
     }
   }
-  /**Llama al service de preguntas */
+  /**Llama al service depreguntas */
   async setPreguntaEnJuego() {
     return this.preguntadosService.getPregunta().then((pregunta) => {
       this.preguntaEnJuego = pregunta;
