@@ -1,0 +1,11 @@
+<app-juego-preguntados-inicio
+  (empezarAJugarEvent)="onEmpezarAJugar()"
+  *ngIf="juegoTerminado == undefined"
+></app-juego-preguntados-inicio>
+<app-juego-preguntados-container
+  *ngIf="juegoTerminado != undefined && !juegoTerminado"
+></app-juego-preguntados-container>
+<app-juego-preguntados-resultados
+  (proximaPreguntaEvent)="onProximaPreguntaEvent()"
+  *ngIf="juegoTerminado"
+></app-juego-preguntados-resultados>

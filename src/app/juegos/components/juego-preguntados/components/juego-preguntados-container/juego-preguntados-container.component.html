@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+  <div class="contenedorImgPreguntados col-6">
+    <img
+      src="{{ preguntaEnJuego?.urlImg }}"
+      alt="Imagen de la pregunta"
+      class="img-fluid"
+    />
+  </div>
+  <div class="col-6">
+    <div class="row justify-content-center">
+      <div class="col-6">¿Cuál es el nombre del actor/actriz?</div>
+    </div>
+    <div class="row justify-content-center mb-2">
+      <div class="col-12">
+        <button class="btn btn-lg btn-success">
+          {{ opcion1 }}
+        </button>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-lg btn-success">
+          {{ opcion2 }}
+        </button>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-lg btn-success">
+          {{ opcion3 }}
+        </button>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-lg btn-success">
+          {{ opcion4 }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

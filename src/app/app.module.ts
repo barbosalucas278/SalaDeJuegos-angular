@@ -6,11 +6,6 @@ import { AppComponent } from './app.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-//Firebase Region
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-
-import { environment } from '../environments/environment';
 import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
 import { AuthComponent } from './pages/auth/auth.component';
@@ -23,7 +18,7 @@ import { LoginComponent } from './pages/components/auth/login/login.component';
 import { LogoutComponent } from './pages/components/auth/logout/logout.component';
 import { JuegosModule } from './juegos/juegos.module';
 import { HttpClientModule } from '@angular/common/http';
-
+import { FirebaseModule } from './firebase/firebase.module';
 
 @NgModule({
   declarations: [
@@ -37,17 +32,16 @@ import { HttpClientModule } from '@angular/common/http';
     ErrorComponent,
     RegisterComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
   ],
   imports: [
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
+    FirebaseModule,
     HttpClientModule,
     JuegosModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,    
   ],
   providers: [],
   bootstrap: [AppComponent],
