@@ -1,6 +1,9 @@
 <header>
   <!-- Fixed navbar -->
-  <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color:#eee;">
+  <nav
+    class="navbar navbar-expand-md navbar-light fixed-top"
+    style="background-color: #eee"
+  >
     <div class="container-fluid">
       <img
         id="logoLayout"
@@ -21,39 +24,87 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+      <div
+        class="collapse navbar-collapse justify-content-end"
+        id="navbarCollapse"
+      >
         <ul class="navbar-nav mb-2 mb-md-0">
           <li class="nav-item" *ngIf="!hasLogged">
-            <a class="nav-link" routerLink="/home" routerLinkActive="active"
+            <a
+              class="nav-link"
+              routerLink="/home"
+              routerLinkActive="active"
+              data-bs-toggle="collapse"
+              data-bs-target=".navbar-collapse.show"
               >Home</a
             >
           </li>
           <li class="nav-item" *ngIf="hasLogged">
-            <a class="nav-link" routerLink="/juegos/ListaDeJuegos">Lista de Juegos</a>
+            <a
+              class="nav-link"
+              routerLink="/juegos/ListaDeJuegos"
+              data-bs-toggle="collapse"
+              data-bs-target=".navbar-collapse.show"
+              >Lista de Juegos</a
+            >
           </li>
           <li class="nav-item" *ngIf="hasLogged">
-            <a class="nav-link" routerLink="/juegos/puntuaciones">Puntuaciones</a>
+            <a
+              class="nav-link"
+              routerLink="/juegos/puntuaciones"
+              data-bs-toggle="collapse"
+              data-bs-target=".navbar-collapse.show"
+              >Puntuaciones</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/about" routerLinkActive="active"
+            <a
+              class="nav-link"
+              routerLink="/about"
+              routerLinkActive="active"
+              data-bs-toggle="collapse"
+              data-bs-target=".navbar-collapse.show"
               >Sobre mí</a
             >
           </li>
           <li class="nav-item" *ngIf="hasLogged === false">
-            <a class="nav-link" (click)="onRegister()">Registrarse</a>
+            <a
+              class="nav-link"
+              (click)="onRegister()"
+              data-bs-toggle="collapse"
+              data-bs-target=".navbar-collapse.show"
+              >Registrarse</a
+            >
           </li>
           <li class="nav-item" *ngIf="hasLogged === false">
-            <a class="nav-link" (click)="onLogin()">Login</a>
+            <a
+              class="nav-link"
+              (click)="onLogin()"
+              data-bs-toggle="collapse"
+              data-bs-target=".navbar-collapse.show"
+              >Login</a
+            >
           </li>
           <li class="nav-item" *ngIf="hasLogged === true">
-            <a class="nav-link" routerLink="/perfil">{{ emailCurrentUsuario }}</a>
+            <a
+              class="nav-link"
+              routerLink="/perfil"
+              data-bs-toggle="collapse"
+              data-bs-target=".navbar-collapse.show"
+              >{{ emailCurrentUsuario }}</a
+            >
           </li>
           <li class="nav-item" *ngIf="hasLogged === true">
-            <a class="nav-link" routerLink="/logout">Cerrar sesión</a>
+            <a
+              class="nav-link"
+              routerLink="/logout"
+              data-bs-toggle="collapse"
+              data-bs-target=".navbar-collapse.show"
+              >Cerrar sesión</a
+            >
           </li>
         </ul>
       </div>
     </div>
   </nav>
 </header>
-

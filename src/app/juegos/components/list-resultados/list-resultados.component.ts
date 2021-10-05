@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { take } from 'rxjs/operators';
 import { PuntajeDetalle } from '../../class/puntaje-detalle';
 import { PuntajeLista } from '../../class/puntaje-lista';
 import { ResultadosService } from '../../services/resultados.service';
@@ -45,14 +46,16 @@ export class ListResultadosComponent implements OnInit {
         }
       );
 
-      this.listadoDePuntajes.sort((a, b) => {
-        return b.puntaje! - a.puntaje!;
-      });
+      this.listadoDePuntajes = this.listadoDePuntajes
+        .sort((a, b) => {
+          return b.puntaje! - a.puntaje!;
+        })
+        .slice(0, 5);
 
       this.mostrandoPuntajes = true;
     });
   }
-  volverAlListado(){
+  volverAlListado() {
     this.mostrandoPuntajes = false;
   }
 

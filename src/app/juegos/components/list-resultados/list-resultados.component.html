@@ -1,33 +1,35 @@
 <div class="container" *ngIf="!mostrandoPuntajes">
-  <h2 class="text-center text-light">Lista de puntuaciones</h2>
+  <h2 class="text-center text-light">Puntuaciones</h2>
   <div class="row">
-    <div class="col-12 mb-5 mt-5">
+    <div class="col-12 mb-3 mt-3 mt-lg-5 mb-lg-5">
       <div class="row justify-content-center">
-        <h4 class="col-8 text-white">Ahorcado</h4>
+        <h4 class="col-12 col-md-8 text-white text-center">Ahorcado</h4>
         <button
-          class="btn btn-success col-3"
+          class="btn btn-success col-12 col-md-3"
           (click)="mostrarResultados('ahorcado')"
         >
           Ver Puntuaciones
         </button>
       </div>
     </div>
-    <div class="col-12 mb-5">
+    <div class="col-12 mb-3 mb-lg-5">
       <div class="row justify-content-center">
-        <h4 class="col-8 text-white">Mayor o Menor</h4>
+        <h4 class="col-12 col-md-8 text-white text-center">Mayor o Menor</h4>
         <button
-          class="btn btn-success col-3"
+          class="btn btn-success col-12 col-md-3"
           (click)="mostrarResultados('MayorMenor')"
         >
           Ver Puntuaciones
         </button>
       </div>
     </div>
-    <div class="col-12 mb-5">
+    <div class="col-12 mb-3 mb-lg-5">
       <div class="row justify-content-center">
-        <h4 class="col-8 text-white">Preguntados (Próximamente!)</h4>
+        <h4 class="col-12 col-md-8 text-white text-center">
+          Preguntados (Próximamente!)
+        </h4>
         <button
-          class="btn btn-success col-3"
+          class="btn btn-success col-12 col-md-3"
           (click)="mostrarResultados('Preguntados')"
         >
           Ver Puntuaciones
@@ -36,9 +38,11 @@
     </div>
     <div class="col-12">
       <div class="row justify-content-center">
-        <h4 class="col-8 text-white">Adivina el color (Próximamente!)</h4>
+        <h4 class="col-12 col-md-8 text-white text-center">
+          Adivina el color (Próximamente!)
+        </h4>
         <button
-          class="btn btn-success col-3"
+          class="btn btn-success col-12 col-md-3"
           (click)="mostrarResultados('AdivinaColor')"
         >
           Ver Puntuaciones
@@ -48,9 +52,9 @@
   </div>
 </div>
 <div class="container" *ngIf="mostrandoPuntajes">
-  <h2 class="text-center text-light">Puntuaciones</h2>
+  <h2 class="text-center text-light">Top 5</h2>
   <div class="row justify-content-end">
-    <button class="btn btn-warning col-1" (click)="volverAlListado()">
+    <button class="btn btn-warning col-3 col-md-1" (click)="volverAlListado()">
       Volver
     </button>
   </div>
