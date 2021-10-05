@@ -19,6 +19,7 @@ import { LogoutComponent } from './pages/components/auth/logout/logout.component
 import { JuegosModule } from './juegos/juegos.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FirebaseModule } from './firebase/firebase.module';
+import { EncuestaComponent } from './pages/components/home/encuesta/encuesta.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { FirebaseModule } from './firebase/firebase.module';
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
+    EncuestaComponent,
   ],
   imports: [
     FormsModule,

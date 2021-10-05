@@ -1,0 +1,215 @@
+<div class="container" id="contenedorEncuesta">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input
+            formControlName="nombre"
+            type="text"
+            class="form-control"
+            id="nombre"
+          />
+          <div
+            class="form-text text-danger"
+            *ngIf="
+              form.get('nombre')?.hasError('nombreInvalido') &&
+              form.get('nombre')?.touched
+            "
+          >
+            * El nombre debe contener solo letras.
+          </div>
+          <div
+            class="form-text text-danger"
+            *ngIf="
+              form.get('nombre')?.hasError('required') &&
+              form.get('nombre')?.touched
+            "
+          >
+            * El nombre es obligatorio.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="apellido" class="form-label">Apellido</label>
+          <input
+            formControlName="apellido"
+            type="text"
+            class="form-control"
+            id="apellido"
+          />
+          <div
+            class="form-text text-danger"
+            *ngIf="
+              form.get('apellido')?.hasError('required') &&
+              form.get('apellido')?.touched
+            "
+          >
+            * El apellido es obligatorio.
+          </div>
+          <div
+            class="form-text text-danger"
+            *ngIf="
+              form.get('apellido')?.hasError('nombreInvalido') &&
+              form.get('apellido')?.touched
+            "
+          >
+            * El apellido debe contener solo letras.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="edad" class="form-label">Edad</label>
+          <input
+            formControlName="edad"
+            type="number"
+            class="form-control"
+            id="edad"
+          />
+          <div
+            class="form-text text-danger"
+            *ngIf="
+              form.get('edad')?.hasError('required') &&
+              form.get('edad')?.touched
+            "
+          >
+            * La edad es requerida.
+          </div>
+          <div
+            class="form-text text-danger"
+            *ngIf="
+              form.get('edad')?.hasError('min') && form.get('edad')?.touched
+            "
+          >
+            * La edad minima es de 18 años.
+          </div>
+          <div
+            class="form-text text-danger"
+            *ngIf="
+              form.get('edad')?.hasError('max') && form.get('edad')?.touched
+            "
+          >
+            * La edad maxima es de 99 años.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="telefono" class="form-label">Teléfono</label>
+          <input
+            formControlName="telefono"
+            type="telefono"
+            class="form-control"
+            id="telefono"
+            aria-describedby="telefonoHelp"
+          />
+          <div
+            class="form-text text-danger"
+            *ngIf="
+              form.get('telefono')?.hasError('required') &&
+              form.get('telefono')?.touched
+            "
+          >
+            * El teléfono es requerido.
+          </div>
+          <div
+            class="form-text text-danger"
+            *ngIf="
+              form.get('telefono')?.hasError('telefonoInvalido') &&
+              form.get('telefono')?.touched
+            "
+          >
+            * El teléfono solo debe contener números.
+          </div>
+          <div
+            class="form-text text-danger"
+            *ngIf="
+              form.get('telefono')?.hasError('maxlength') &&
+              form.get('telefono')?.touched
+            "
+          >
+            * El teléfono solo debe contener 10 dígitos.
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="pregunta1"
+              >¿Qué tipo de juegos les gustaría ver en la página?</label
+            >
+            <textarea
+              class="form-control"
+              formControlName="pregunta1"
+              id="pregunta1"
+            ></textarea>
+            <div
+              class="form-text text-danger"
+              *ngIf="
+                form.get('pregunta1')?.hasError('required') &&
+                form.get('pregunta1')?.touched
+              "
+            >
+              * El campo es requerido.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="pregunta2"
+              >¿En qué dispositivo preferís jugar?</label
+            >
+            <div>
+              <input
+                id="celular"
+                type="radio"
+                class="custom-control-input"
+                value="celular"
+                formControlName="pregunta2"
+                required
+              />
+              <label class="custom-control-label" for="male"> Celular</label>
+            </div>
+
+            <div>
+              <input
+                id="computadora"
+                type="radio"
+                class="custom-control-input"
+                value="computadora"
+                formControlName="pregunta2"
+                required
+              />
+              <label class="custom-control-label" for="female">
+                Computadora</label
+              >
+            </div>
+            <div
+              class="form-text text-danger"
+              *ngIf="
+                form.get('pregunta2')?.hasError('required') &&
+                form.get('pregunta2')?.touched
+              "
+            >
+              * El campo es requerido.
+            </div>
+          </div>
+          <div class="mb-3 form-check">
+            <label class="form-check-label" for="exampleCheck1"
+              >¿Probaste todos los juegos?</label
+            >
+            <input
+              formControlName="pregunta3"
+              type="checkbox"
+              class="form-check-input"
+              id="exampleCheck1"
+            />
+            <div
+              class="form-text text-danger"
+              *ngIf="
+                form.get('pregunta3')?.hasError('required') &&
+                form.get('pregunta3')?.touched
+              "
+            >
+              * El campo es requerido.
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

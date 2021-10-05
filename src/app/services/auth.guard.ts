@@ -20,7 +20,6 @@ export class AuthGuard implements CanLoad,CanActivate,CanActivateChild {
   canLoad(): Observable<boolean> {
     return this.authService.getUserAuthState().pipe(
       map((user) => {
-        console.log(user);
         return user != null;
       }),
       tap((hasUser) => {

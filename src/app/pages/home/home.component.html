@@ -1,12 +1,39 @@
 <section class="row">
   <div class="col-12 col-lg-8">
-    <div class="row justify-content-center justify-content-sm-end">
+    <div
+      class="row justify-content-center justify-content-sm-end"
+      *ngIf="!hasLogged"
+    >
       <div class="encabezadoHome">
         <h2 class="text-center mt-4">Bienvenidxs a la sala de juegos</h2>
         <p class="text-center mt-1 mt-sm-4">
           En esta página encontraras una variedad inmensa de juegos
         </p>
       </div>
+    </div>
+    <div
+      class="row justify-content-center justify-content-sm-end"
+      *ngIf="hasLogged"
+    >
+      <div class="encabezadoHome">
+        <h2 class="text-center mt-4">Bienvenidxs a la sala de juegos</h2>
+        <p class="text-center mt-1 mt-sm-4">
+          Nos gustaría saber un poco mas de vos y que juegos te gustaría ver
+          <br />
+          Te dejamos una pequeña encuesta
+        </p>
+        <div *ngIf="mensajeEnviado">
+          <p class="text-center mt-1 mt-sm-4">
+            Gracias por ayudarnos a mejorar!
+            <br />
+            Vamos a tener en cuesta tus comentarios!
+          </p>
+        </div>
+      </div>
+      <app-encuesta
+      *ngIf="mensajeEnviado == undefined"
+        (mensajeEnviadoEvent)="onEncuestaSubmit($event)"
+      ></app-encuesta>
     </div>
   </div>
   <div class="col-12 col-lg-4">
