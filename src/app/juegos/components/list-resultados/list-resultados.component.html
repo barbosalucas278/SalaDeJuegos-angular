@@ -1,0 +1,60 @@
+<div class="container" *ngIf="!mostrandoPuntajes">
+  <h2 class="text-center text-light">Lista de puntuaciones</h2>
+  <div class="row">
+    <div class="col-12 mb-5 mt-5">
+      <div class="row justify-content-center">
+        <h4 class="col-8 text-white">Ahorcado</h4>
+        <button
+          class="btn btn-success col-3"
+          (click)="mostrarResultados('ahorcado')"
+        >
+          Ver Puntuaciones
+        </button>
+      </div>
+    </div>
+    <div class="col-12 mb-5">
+      <div class="row justify-content-center">
+        <h4 class="col-8 text-white">Mayor o Menor</h4>
+        <button
+          class="btn btn-success col-3"
+          (click)="mostrarResultados('MayorMenor')"
+        >
+          Ver Puntuaciones
+        </button>
+      </div>
+    </div>
+    <div class="col-12 mb-5">
+      <div class="row justify-content-center">
+        <h4 class="col-8 text-white">Preguntados (Próximamente!)</h4>
+        <button
+          class="btn btn-success col-3"
+          (click)="mostrarResultados('Preguntados')"
+        >
+          Ver Puntuaciones
+        </button>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="row justify-content-center">
+        <h4 class="col-8 text-white">Adivina el color (Próximamente!)</h4>
+        <button
+          class="btn btn-success col-3"
+          (click)="mostrarResultados('AdivinaColor')"
+        >
+          Ver Puntuaciones
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" *ngIf="mostrandoPuntajes">
+  <h2 class="text-center text-light">Puntuaciones</h2>
+  <div class="row justify-content-end">
+    <button class="btn btn-warning col-1" (click)="volverAlListado()">
+      Volver
+    </button>
+  </div>
+  <app-resultado-detalle
+    [resultadoDetalle]="listadoDePuntajes"
+  ></app-resultado-detalle>
+</div>

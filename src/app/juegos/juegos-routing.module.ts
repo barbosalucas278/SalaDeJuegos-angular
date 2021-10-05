@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../services/auth.guard';
 import { ListJuegosComponent } from './components/list-juegos/list-juegos.component';
+import { ListResultadosComponent } from './components/list-resultados/list-resultados.component';
 import { JuegosHomeComponent } from './pages/juegos-home/juegos-home.component';
 
 const routes: Routes = [
@@ -14,6 +15,10 @@ const routes: Routes = [
       {
         path: 'ListaDeJuegos',
         component: ListJuegosComponent,
+      },
+      {
+        path: 'puntuaciones',
+        component: ListResultadosComponent,
       },
       {
         path: 'MayorOMenor',
@@ -35,6 +40,13 @@ const routes: Routes = [
           import(
             './components/juego-preguntados/juego-preguntados.module'
           ).then((m) => m.JuegoPreguntadosModule),
+      },
+      {
+        path: 'AdivinaColor',
+        loadChildren: () =>
+          import(
+            './components/juego-adivina-color/juego-adivina-color.module'
+          ).then((m) => m.JuegoAdivinaColorModule),
       },
     ],
   },

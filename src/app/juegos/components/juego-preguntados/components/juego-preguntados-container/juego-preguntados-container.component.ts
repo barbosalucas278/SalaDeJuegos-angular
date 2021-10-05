@@ -13,18 +13,23 @@ export class JuegoPreguntadosContainerComponent implements OnInit {
 
   vidas!: number;
   cantidadDeAciertos: number;
-  preguntaEnJuego?: Preguntados;
-  opcion1?: string;
-  opcion2?: string;
-  opcion3?: string;
-  opcion4?: string;
+  preguntaEnJuego!: Preguntados;
+  opciones: string[];
   terminoRonda?: boolean;
   constructor(private preguntadosService: PreguntadosService) {
+    this.opciones = [];
+    this.preguntaEnJuego = {
+      opcionCorrecta: '',
+      urlImg: '',
+      opcionesIncorrectas: [],
+    };
     this.cantidadDeAciertos = 0;
     this.terminoRonda = false;
     this.vidas = preguntadosService.vidasRestantes;
     this.subscribeEventCeroVidas();
     this.subscribeEventVidasChanged();
+    this.setPreguntaEnJuego();
+    console.log(this.opciones);
   }
   /**Setter Vidas para que no sean negativas */
   setVidas(value: number) {
@@ -33,20 +38,20 @@ export class JuegoPreguntadosContainerComponent implements OnInit {
     }
   }
   /**Llama al service depreguntas */
-  async setPreguntaEnJuego() {
-    return this.preguntadosService.getPregunta().then((pregunta) => {
-      this.preguntaEnJuego = pregunta;
-      this.crearOpciones();
+  setPreguntaEnJuego() {
+    this.preguntadosService.OpcionCorrectaEvent.subscribe((opcion) => {
+      this.preguntaEnJuego.opcionCorrecta = opcion.opcionCorrecta;
+      this.preguntaEnJuego.urlImg = opcion.urlImg;
+
+      this.opciones.push(this.preguntaEnJuego.opcionCorrecta!);
+    });
+    this.preguntadosService.OpcionesIncorrectasEvent.subscribe((opcion) => {
+      this.preguntaEnJuego.opcionesIncorrectas?.push(opcion);
+      
+      this.opciones.push(opcion);
     });
   }
-  crearOpciones() {
-    let cantidadDeOpciones = 4;
-    let opciones = [
-      this.preguntaEnJuego?.opcionesIncorrectas,
-      this.preguntaEnJuego?.opcionCorrecta,
-    ];
-    console.log(opciones);
-  }
+
   subscribeEventCeroVidas() {
     this.preguntadosService.ceroVidasEvent.subscribe(() => {
       this.setVidas(0);
@@ -95,7 +100,8 @@ export class JuegoPreguntadosContainerComponent implements OnInit {
   // }
   /**Funcion que hay que invocar cuando queremos empezar otra ronda */
   lanzarProximaPregunta() {
-    this.setPreguntaEnJuego().then(() => this.resetearVariablesDelJuego());
+    this.setPreguntaEnJuego();
+    this.resetearVariablesDelJuego();
   }
   /**Resetea las variables del juego */
   resetearVariablesDelJuego() {
@@ -108,7 +114,5 @@ export class JuegoPreguntadosContainerComponent implements OnInit {
     };
     this.userLoseEvent.emit(resultado);
   }
-  ngOnInit(): void {
-    this.setPreguntaEnJuego();
-  }
+  ngOnInit(): void {}
 }

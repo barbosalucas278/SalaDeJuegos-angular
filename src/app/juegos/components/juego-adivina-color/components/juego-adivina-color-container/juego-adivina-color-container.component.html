@@ -1,0 +1,57 @@
+<div class="row mt-5">
+  <div class="col-10">
+    <div class="row justify-content-around mt-5 ms-3">
+      <!-- Progress Bar -->
+      <div class="contador text-center">
+        {{ timer }}
+      </div>
+
+      <div class="col-4 card-palabra me-2">
+        <p>{{ nombreColorEnJuego.nombreColor }}</p>
+      </div>
+      <div class="col-4 card-palabra">
+        <p [ngClass]="colorEnJuego.color">
+          {{ colorEnJuego.nombreColor }}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <h2 class="text-center" *ngIf="jugadorAcierta">Acertaste!</h2>
+      <h2
+        class="text-center"
+        *ngIf="!jugadorAcierta && jugadorAcierta != undefined"
+      >
+        No has acertado!
+      </h2>
+    </div>
+    <!-------------------------------->
+    <div class="row justify-content-center mt-5 ms-3" *ngIf="!terminoRonda">
+      <div class="col-4 d-flex justify-content-center">
+        <button
+          class="btn btn-lg btn-light fw-bolder"
+          (click)="onJugadorEleccion(false)"
+        >
+          No Coincide
+        </button>
+      </div>
+      <div class="col-4 d-flex justify-content-center">
+        <button
+          class="btn btn-lg btn-light fw-bolder"
+          (click)="onJugadorEleccion(true)"
+        >
+          Coincide
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!--Sector Vidas------------------>
+  <div class="col-2 bg-success h-25">
+    <div class="row justify-content-center">
+      <div class="col-6">VIDAS</div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-3">{{ vidas }}</div>
+    </div>
+  </div>
+</div>

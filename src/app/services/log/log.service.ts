@@ -3,8 +3,6 @@ import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
-import { User } from 'src/app/class/user';
 import { UserModel } from 'src/app/class/user-model';
 import { PuntajeJuego } from 'src/app/juegos/class/puntaje-juego';
 @Injectable({
@@ -22,8 +20,9 @@ export class LogService {
   }
   async savePuntajeJuegos(resultados: PuntajeJuego) {
     const { nombreJuego, puntaje, usuario } = resultados;
-    const docRef = await this.db.doc(`${nombreJuego}/puntajesPorUsuario`);
-    await docRef.collection(`${usuario.email}`).add({
+    const docRef = await this.db.collection(`${nombreJuego}`);
+    await docRef.add({
+      usuario:usuario.email,
       puntaje: puntaje,
       fecha: new Date(),
     });

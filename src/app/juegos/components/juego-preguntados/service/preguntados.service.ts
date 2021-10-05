@@ -1,18 +1,23 @@
 import { HttpClient } from '@angular/common/http';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { EventEmitter, Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Preguntados } from '../class/preguntados';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PreguntadosService {
+  private indiceRandom = generarNumeroRandom();
   vidasRestantes!: number;
   vidasChangedEvent: EventEmitter<number> = new EventEmitter();
+  OpcionesIncorrectasEvent: EventEmitter<string> = new EventEmitter();
+  OpcionCorrectaEvent: EventEmitter<any> = new EventEmitter();
   ceroVidasEvent = new EventEmitter();
 
   constructor(private http: HttpClient) {
     this.vidasRestantes = 1;
+    this.getOpcionesIncorrectas();
+    this.getOpcionCorrecta();
   }
   resetGameParameters() {
     this.vidasRestantes = 1;
@@ -26,45 +31,55 @@ export class PreguntadosService {
       this.vidasChangedEvent.emit(this.vidasRestantes);
     }
   }
-  async getPregunta() {
-    const key = "b7f993908a5343f982b085b85361b93e";
-    const pregunta: Preguntados = {};
-    const indiceRandom = generarNumeroRandom();
+  getOpcionesIncorrectas() {
     const indicesIncorrectos = [
-      generarNumeroRandom(indiceRandom),
-      generarNumeroRandom(indiceRandom),
-      generarNumeroRandom(indiceRandom),
+      generarNumeroRandom(this.indiceRandom),
+      generarNumeroRandom(this.indiceRandom),
+      generarNumeroRandom(this.indiceRandom),
     ];
-    const url = `https://api.rawg.io/api/games/${indiceRandom}?key=${key}`;
     indicesIncorrectos.forEach((x) => {
-      const urlIncorrectas = `https://api.rawg.io/api/games/${x}?key=${key}`;
-      let getOpcionesIncorrectas = this.http.get<any>(urlIncorrectas).pipe(
+      const urlIncorrectas = `https://imdb-api.com/en/API/Name/k_uvngshml/nm${x}`;
+      this.http
+        .get<any>(urlIncorrectas)
+        .pipe(
+          map((response) => {
+            let opcionIncorrecta = response.name;
+            return opcionIncorrecta;
+          })
+        )
+        .subscribe((opcion) => {
+          console.log(opcion);
+          this.OpcionesIncorrectasEvent.emit(opcion);
+        });
+    });
+  }
+  getOpcionCorrecta() {
+    const url = `https://imdb-api.com/en/API/Name/k_uvngshml/nm${this.indiceRandom}`;
+    this.http
+      .get<any>(url)
+      .pipe(
         map((response) => {
-          console.log(response);
-          let opcionIncorrecta = response.name;
-          return opcionIncorrecta;
+          let pregunta = {
+            urlImg: response.image,
+            opcionCorrecta: response.name,
+          };
+          return pregunta;
         })
-      );
-      getOpcionesIncorrectas.toPromise().then((opcion) => {
+      )
+      .subscribe((opcion) => {
         console.log(opcion);
+
+        this.OpcionCorrectaEvent.emit(opcion);
       });
-      pregunta.opcionesIncorrectas?.push(x);
-    });
-    let resultado = this.http.get<any>(url).pipe(
-      map((response) => {
-        let pregunta: Preguntados = {
-          urlImg: response.background_image_additional,
-          opcionCorrecta: response.name,
-        };
-        return pregunta;
-      })
-    );
-    resultado.toPromise().then((x) => {
-      pregunta.urlImg = x.urlImg;
-      pregunta.opcionCorrecta = x.opcionCorrecta;
-    });
-    console.log(pregunta);
-    return pregunta;
+
+    // const pregunta: Preguntados = {
+    //   urlImg:
+    //     'https://static.wikia.nocookie.net/doblaje/images/7/71/Jackblack.jpg/revision/latest/top-crop/width/360/height/450?cb=20140715053129&path-prefix=es',
+    //   opcionCorrecta: 'Jack Black',
+    //   opcionesIncorrectas: ['Peter Lanzani', 'Susana Gimenez', 'Micky Mouse'],
+    // };
+    // this.preguntaEnJuego = pregunta;
+    // console.log(this.preguntaEnJuego);
   }
 }
 /**Genera un numero aleatorio, pudiendo indicar un numero a evitar */

@@ -1,0 +1,9 @@
+<app-juego-adivina-color-resultados
+  *ngIf="juegoTerminado"
+  [userResultado]="resultadoDelJuego!"
+  (playAgainEvent)="onPlayAgain()"
+></app-juego-adivina-color-resultados>
+<app-juego-adivina-color-container
+  *ngIf="!juegoTerminado"
+  (userLoseEvent)="onUserLose($event)"
+></app-juego-adivina-color-container>

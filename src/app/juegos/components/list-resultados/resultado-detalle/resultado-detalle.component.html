@@ -1,0 +1,20 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Usuario</th>
+      <th scope="col">Puntaje</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let puntaje of resultadoDetalle; let i = index">
+      <td>{{ i+1 }}</td>
+      <td>
+        {{ puntaje.usuario }}
+      </td>
+      <td>
+        {{ puntaje.puntaje }}
+      </td>
+    </tr>
+  </tbody>
+</table>
