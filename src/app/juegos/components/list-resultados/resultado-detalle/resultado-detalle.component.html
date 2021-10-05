@@ -10,7 +10,7 @@
     <tr *ngFor="let puntaje of resultadoDetalle; let i = index">
       <td>{{ i+1 }}</td>
       <td>
-        {{ puntaje.usuario }}
+        {{ mostrarSoloPrefijo(puntaje.usuario) }}
       </td>
       <td>
         {{ puntaje.puntaje }}

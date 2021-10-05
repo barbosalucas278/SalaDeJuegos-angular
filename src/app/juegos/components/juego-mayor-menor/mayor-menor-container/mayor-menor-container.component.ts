@@ -66,7 +66,7 @@ export class MayorMenorContainerComponent implements OnInit {
   verificareleccion() {
     this.terminoRonda = true;
     this.mostrarCartaTapada();
-    if (this.cartaEnJuego!.valor >= this.cartaOculta.valor) {
+    if (this.cartaEnJuego!.valor > this.cartaOculta.valor) {
       if (this.jugadorEligioMayor) {
         this.mayorMenorService.restarVida();
         this.jugadorAcierta = false;
@@ -74,7 +74,7 @@ export class MayorMenorContainerComponent implements OnInit {
         this.cantidadDeAciertos++;
         this.jugadorAcierta = true;
       }
-    } else if (this.cartaEnJuego!.valor <= this.cartaOculta.valor) {
+    } else if (this.cartaEnJuego!.valor < this.cartaOculta.valor) {
       if (this.jugadorEligioMayor) {
         this.cantidadDeAciertos++;
         this.jugadorAcierta = true;
@@ -82,6 +82,8 @@ export class MayorMenorContainerComponent implements OnInit {
         this.mayorMenorService.restarVida();
         this.jugadorAcierta = false;
       }
+    } else if (this.cartaEnJuego!.valor == this.cartaOculta.valor) {
+      this.jugadorAcierta = true;
     }
     setTimeout(() => {
       this.lanzarProximaCarta();
@@ -106,4 +108,7 @@ export class MayorMenorContainerComponent implements OnInit {
     this.userLoseEvent.emit(resultado);
   }
   ngOnInit(): void {}
+  ngOnDestroy() {
+    this.mayorMenorService.resetGameParameters();
+  }
 }
