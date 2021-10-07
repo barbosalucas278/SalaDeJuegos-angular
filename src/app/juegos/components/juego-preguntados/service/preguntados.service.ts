@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { EventEmitter, Injectable } from '@angular/core';
-import { map, tap } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -37,8 +37,11 @@ export class PreguntadosService {
       generarNumeroRandom(this.indiceRandom),
       generarNumeroRandom(this.indiceRandom),
     ];
+
     indicesIncorrectos.forEach((x) => {
       const urlIncorrectas = `https://imdb-api.com/en/API/Name/k_uvngshml/nm${x}`;
+      //const urlIncorrectas = `http://localhost:3000/actores/${x}`;
+
       this.http
         .get<any>(urlIncorrectas)
         .pipe(
@@ -48,13 +51,14 @@ export class PreguntadosService {
           })
         )
         .subscribe((opcion) => {
-          console.log(opcion);
           this.OpcionesIncorrectasEvent.emit(opcion);
         });
     });
   }
   getOpcionCorrecta() {
     const url = `https://imdb-api.com/en/API/Name/k_uvngshml/nm${this.indiceRandom}`;
+    //const url = `http://localhost:3000/actores/${this.indiceRandom}`;
+
     this.http
       .get<any>(url)
       .pipe(
@@ -67,8 +71,6 @@ export class PreguntadosService {
         })
       )
       .subscribe((opcion) => {
-        console.log(opcion);
-
         this.OpcionCorrectaEvent.emit(opcion);
       });
 
@@ -84,15 +86,19 @@ export class PreguntadosService {
 }
 /**Genera un numero aleatorio, pudiendo indicar un numero a evitar */
 function generarNumeroRandom(numeroAEvitar: any = null) {
-  let random = Math.floor(Math.random() * (Math.random() * 1000));
+  //1000para imdb  |  100 para json-server
+  const decimales = 1000;
+  let random = Math.floor(Math.random() * (Math.random() * decimales));
 
   if (numeroAEvitar != null) {
     while (random == numeroAEvitar) {
-      random = Math.floor(Math.random() * (Math.random() * 1000));
+      random = Math.floor(Math.random() * (Math.random() * decimales));
     }
     return generarIdValido(random);
+    //return random;
   }
   return generarIdValido(random);
+  //return random;
 }
 function generarIdValido(numero: number) {
   let arrayNumero = numero.toString();

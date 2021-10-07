@@ -3,9 +3,16 @@
   *ngIf="juegoTerminado == undefined"
 ></app-juego-preguntados-inicio>
 <app-juego-preguntados-container
-  *ngIf="juegoTerminado != undefined && !juegoTerminado"
+  *ngIf="!rondaTerminada && !juegoTerminado"
+  (userLoseEvent)="onUserLose($event)"
+  [rondaTerminada]="rondaTerminada"
+  (rondaTerminadaEvent)="onRondaTerminada($event)"
 ></app-juego-preguntados-container>
 <app-juego-preguntados-resultados
+  [userResultado]="resultadoDelJuego"
   (proximaPreguntaEvent)="onProximaPreguntaEvent()"
-  *ngIf="juegoTerminado"
+  (playAgainEvent)="onPlayAgain()"
+  [juegoTerminado]="juegoTerminado"
+  [rondaTerminada]="rondaTerminada"
+  *ngIf="rondaTerminada || juegoTerminado"
 ></app-juego-preguntados-resultados>

@@ -11,20 +11,21 @@ export class JuegoPreguntadosResultadosComponent implements OnInit {
   @Output() playAgainEvent = new EventEmitter();
   @Output() proximaPreguntaEvent = new EventEmitter();
   @Input() userResultado?: PreguntadosResultado;
+  @Input() juegoTerminado?: boolean;
+  @Input() rondaTerminada?: boolean;
   //pensar donde y cuando mostrar estos datos
   cantidadDePuntos: number;
   cantidadDeAciertos: number;
-  juegoTerminado: boolean;
   constructor(private router: Router) {
-    this.juegoTerminado = false;
     this.cantidadDePuntos = 0;
     this.cantidadDeAciertos = 0;
   }
 
   ngOnInit(): void {}
   ngOnChanges() {
-    this.cantidadDePuntos = this.userResultado!.cantidadDeAciertos * 10;
-    //Guardar los puntos aca
+    if (this.userResultado) {
+      this.cantidadDePuntos = this.userResultado!.cantidadDeAciertos * 10;
+    }
   }
   onPlayAgain() {
     setTimeout(() => {

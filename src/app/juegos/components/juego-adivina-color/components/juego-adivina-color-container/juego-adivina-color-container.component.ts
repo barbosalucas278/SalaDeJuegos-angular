@@ -62,12 +62,14 @@ export class JuegoAdivinaColorContainerComponent implements OnInit {
 
     setTimeout(() => {
       console.log(this.terminoRonda);
-      
-      if(!this.terminoRonda){
+
+      if (!this.terminoRonda) {
         this.lanzarProximoColor();
         this.adivinaColorService.restarVida();
+      } else {
+        this.lanzarProximoColor();
       }
-    }, 3500);
+    }, 4000);
   }
   subscribeEventCeroVidas() {
     this.adivinaColorService.ceroVidasEvent.subscribe(() => {
@@ -108,12 +110,13 @@ export class JuegoAdivinaColorContainerComponent implements OnInit {
         this.jugadorAcierta = true;
       }
     }
-    setTimeout(() => {
-      this.lanzarProximoColor();
-    }, 3000);
+    // setTimeout(() => {
+    //   this.lanzarProximoColor();
+    // }, 3000);
   }
 
   lanzarProximoColor() {
+    this.terminoRonda = false;
     this.timer = 4;
     this.jugadorAcierta = undefined;
     console.log('Lanzar proximo color');

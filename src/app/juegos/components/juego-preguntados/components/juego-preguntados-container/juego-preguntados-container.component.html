@@ -1,36 +1,25 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center mt-5">
   <div class="contenedorImgPreguntados col-1">
     <img
       src="{{ preguntaEnJuego?.urlImg }}"
-      alt="Imagen de la pregunta"      
+      alt="Imagen de la pregunta"
       class="img-fluid"
     />
   </div>
-  <div class="col-6">
+  <div class="col-8">
     <div class="row justify-content-center">
-      <div class="col-6">¿Cuál es el nombre del actor/actriz?</div>
+      <div class="col-6"><h3 class="text-light">¿Cuál es el nombre del actor/actriz?</h3></div>
     </div>
-    <div class="row justify-content-center mb-2">
-      <div class="col-12" *ngFor="let i of opciones">
-        <button class="btn btn-lg btn-success">
-          {{ i }}
+    <div class="row justify-content-center mb-2 mt-5">
+      <div class="col-6" *ngFor="let opcion of opciones; let i = index">
+        <button
+          class="btn btn-lg btn-light mb-3"
+          id="opcion{{ i }}"
+          (click)="onJugadorEleccion($event)"
+        >
+          {{ opcion }}
         </button>
       </div>
-      <!-- <div class="col-12">
-        <button class="btn btn-lg btn-success">
-          {{ preguntaEnJuego?.opcionCorrecta }}
-        </button>
-      </div>
-      <div class="col-12">
-        <button class="btn btn-lg btn-success">
-          {{ opcion3 }}
-        </button>
-      </div>
-      <div class="col-12">
-        <button class="btn btn-lg btn-success">
-          {{ opcion4 }}
-        </button>
-      </div> -->
     </div>
   </div>
 </div>

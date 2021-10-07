@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Preguntados } from '../../class/preguntados';
 import { PreguntadosResultado } from '../../class/preguntados-resultado';
 import { PreguntadosService } from '../../service/preguntados.service';
@@ -10,13 +10,19 @@ import { PreguntadosService } from '../../service/preguntados.service';
 })
 export class JuegoPreguntadosContainerComponent implements OnInit {
   @Output() userLoseEvent = new EventEmitter<PreguntadosResultado>();
+  @Output() rondaTerminadaEvent = new EventEmitter();
+
+  @Input() rondaTerminada: boolean;
 
   vidas!: number;
   cantidadDeAciertos: number;
   preguntaEnJuego!: Preguntados;
+  indiceCorrecto?: number;
   opciones: string[];
+  jugadorAcierta: boolean;
   terminoRonda?: boolean;
   constructor(private preguntadosService: PreguntadosService) {
+    this.jugadorAcierta = false;
     this.opciones = [];
     this.preguntaEnJuego = {
       opcionCorrecta: '',
@@ -24,12 +30,11 @@ export class JuegoPreguntadosContainerComponent implements OnInit {
       opcionesIncorrectas: [],
     };
     this.cantidadDeAciertos = 0;
-    this.terminoRonda = false;
+    this.rondaTerminada = false;
     this.vidas = preguntadosService.vidasRestantes;
     this.subscribeEventCeroVidas();
     this.subscribeEventVidasChanged();
     this.setPreguntaEnJuego();
-    console.log(this.opciones);
   }
   /**Setter Vidas para que no sean negativas */
   setVidas(value: number) {
@@ -42,20 +47,22 @@ export class JuegoPreguntadosContainerComponent implements OnInit {
     this.preguntadosService.OpcionCorrectaEvent.subscribe((opcion) => {
       this.preguntaEnJuego.opcionCorrecta = opcion.opcionCorrecta;
       this.preguntaEnJuego.urlImg = opcion.urlImg;
-
       this.opciones.push(this.preguntaEnJuego.opcionCorrecta!);
     });
     this.preguntadosService.OpcionesIncorrectasEvent.subscribe((opcion) => {
       this.preguntaEnJuego.opcionesIncorrectas?.push(opcion);
-      
       this.opciones.push(opcion);
+      this.indiceCorrecto = this.opciones.indexOf(opcion);
     });
   }
 
   subscribeEventCeroVidas() {
     this.preguntadosService.ceroVidasEvent.subscribe(() => {
-      this.setVidas(0);
-      this.mostrarResultadoDelJuego();
+      this.mostrarOpcionCorrecta();
+      setTimeout(() => {
+        this.setVidas(0);
+        this.mostrarResultadoDelJuego();
+      }, 2000);
     });
   }
   subscribeEventVidasChanged() {
@@ -63,49 +70,64 @@ export class JuegoPreguntadosContainerComponent implements OnInit {
       this.setVidas(x);
     });
   }
-  // onJugadorEleccion(mayor: boolean) {
-  //   if (mayor) {
-  //     this.jugadorEligioMayor = true;
-  //   } else {
-  //     this.jugadorEligioMayor = false;
-  //   }
-  //   this.verificareleccion();
-  // }
-  // verificareleccion() {
-  //   this.terminoRonda = true;
-  //   this.mostrarCartaTapada();
-  //   if (this.cartaEnJuego!.valor >= this.cartaOculta.valor) {
-  //     if (this.jugadorEligioMayor) {
-  //       this.mayorMenorService.restarVida();
-  //       this.jugadorAcierta = false;
-  //     } else {
-  //       this.cantidadDeAciertos++;
-  //       this.jugadorAcierta = true;
-  //     }
-  //   } else if (this.cartaEnJuego!.valor <= this.cartaOculta.valor) {
-  //     if (this.jugadorEligioMayor) {
-  //       this.cantidadDeAciertos++;
-  //       this.jugadorAcierta = true;
-  //     } else {
-  //       this.mayorMenorService.restarVida();
-  //       this.jugadorAcierta = false;
-  //     }
-  //   }
-  //   setTimeout(() => {
-  //     this.lanzarProximaCarta();
-  //   }, 2000);
-  // }
-  // mostrarCartaTapada() {
-  //   this.cartaBocaAbajo = this.cartaOculta.url;
-  // }
+  onJugadorEleccion(e: any) {
+    const indice = e.target.id;
+    const i = parseInt(indice.replace('opcion', ''));
+
+    if (i == this.indiceCorrecto) {
+      this.jugadorAcierta = true;
+    } else {
+      this.jugadorAcierta = false;
+    }
+
+    this.verificareleccion();
+  }
+  verificareleccion() {
+    this.rondaTerminada = true;
+    this.mostrarOpcionCorrecta();
+    if (!this.jugadorAcierta) {
+      this.preguntadosService.restarVida();
+      this.jugadorAcierta = false;
+    } else {
+      this.cantidadDeAciertos++;
+      this.jugadorAcierta = true;
+    }
+    setTimeout(() => {
+      const resultado: PreguntadosResultado = {
+        cantidadDeAciertos: this.cantidadDeAciertos,
+      };
+      this.rondaTerminadaEvent.emit(resultado);
+    }, 2000);
+  }
+  mostrarOpcionCorrecta() {
+    this.opciones.forEach((opcion, index) => {
+      const buttonIncorrecto = document.getElementById(`opcion${index}`);
+      buttonIncorrecto?.classList.remove('btn-light');
+      buttonIncorrecto?.classList.add('btn-danger');
+    });
+    const buttonCorrecto = document.getElementById(
+      `opcion${this.indiceCorrecto}`
+    );
+    buttonCorrecto?.classList.remove('btn-danger');
+    buttonCorrecto?.classList.add('btn-success');
+  }
   /**Funcion que hay que invocar cuando queremos empezar otra ronda */
   lanzarProximaPregunta() {
-    this.setPreguntaEnJuego();
     this.resetearVariablesDelJuego();
+    this.preguntadosService.getOpcionCorrecta();
+    this.preguntadosService.getOpcionesIncorrectas();
   }
   /**Resetea las variables del juego */
   resetearVariablesDelJuego() {
-    this.terminoRonda = false;
+    this.jugadorAcierta = false;
+    this.indiceCorrecto = -1;
+    this.opciones = [];
+    this.preguntaEnJuego = {
+      opcionCorrecta: '',
+      urlImg: '',
+      opcionesIncorrectas: [],
+    };
+    this.rondaTerminada = false;
   }
   /**Emite el evento que avisa que se termino la ronda indicando estadisticas del juego */
   mostrarResultadoDelJuego() {
@@ -115,4 +137,11 @@ export class JuegoPreguntadosContainerComponent implements OnInit {
     this.userLoseEvent.emit(resultado);
   }
   ngOnInit(): void {}
+  ngOnChanges() {
+    if (!this.rondaTerminada) {
+      setTimeout(() => {
+        this.lanzarProximaPregunta();
+      }, 2000);
+    }
+  }
 }
