@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { EventEmitter, Injectable } from '@angular/core';
 import { map, take, tap } from 'rxjs/operators';
+import { Preguntados } from '../class/preguntados';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +10,6 @@ export class PreguntadosService {
   private indiceRandom = generarNumeroRandom();
   vidasRestantes!: number;
   vidasChangedEvent: EventEmitter<number> = new EventEmitter();
-  OpcionesIncorrectasEvent: EventEmitter<string> = new EventEmitter();
-  OpcionCorrectaEvent: EventEmitter<any> = new EventEmitter();
   ceroVidasEvent = new EventEmitter();
 
   constructor(private http: HttpClient) {
@@ -21,6 +19,7 @@ export class PreguntadosService {
   }
   resetGameParameters() {
     this.vidasRestantes = 1;
+    this.indiceRandom = generarNumeroRandom();
     this.vidasChangedEvent.emit();
   }
   restarVida() {
@@ -31,57 +30,58 @@ export class PreguntadosService {
       this.vidasChangedEvent.emit(this.vidasRestantes);
     }
   }
-  getOpcionesIncorrectas() {
+  async armarPregunta(): Promise<Preguntados> {
+    const preguntaEnJuego: Preguntados = {};
+    preguntaEnJuego.opcionesIncorrectas = await this.getOpcionesIncorrectas();
+    const correctas = await this.getOpcionCorrecta();
+    setTimeout(() => {
+      preguntaEnJuego.urlImg = correctas.urlImg;
+      preguntaEnJuego.opcionCorrecta = correctas.opcionCorrecta;
+    }, 1000);
+
+    return preguntaEnJuego;
+  }
+  async getOpcionesIncorrectas() {
     const indicesIncorrectos = [
       generarNumeroRandom(this.indiceRandom),
       generarNumeroRandom(this.indiceRandom),
       generarNumeroRandom(this.indiceRandom),
     ];
-
+    const indicecsIncorrectosResponse: string[] = [];
     indicesIncorrectos.forEach((x) => {
       const urlIncorrectas = `https://imdb-api.com/en/API/Name/k_uvngshml/nm${x}`;
-      //const urlIncorrectas = `http://localhost:3000/actores/${x}`;
-
-      this.http
-        .get<any>(urlIncorrectas)
-        .pipe(
-          map((response) => {
-            let opcionIncorrecta = response.name;
-            return opcionIncorrecta;
-          })
-        )
-        .subscribe((opcion) => {
-          this.OpcionesIncorrectasEvent.emit(opcion);
-        });
-    });
-  }
-  getOpcionCorrecta() {
-    const url = `https://imdb-api.com/en/API/Name/k_uvngshml/nm${this.indiceRandom}`;
-    //const url = `http://localhost:3000/actores/${this.indiceRandom}`;
-
-    this.http
-      .get<any>(url)
-      .pipe(
+      // const urlIncorrectas = `http://localhost:3000/actores/${x}`;
+      let resultado = this.http.get<any>(urlIncorrectas).pipe(
         map((response) => {
-          let pregunta = {
-            urlImg: response.image,
-            opcionCorrecta: response.name,
-          };
-          return pregunta;
+          let opcionIncorrecta = response.name;
+          return opcionIncorrecta;
         })
-      )
-      .subscribe((opcion) => {
-        this.OpcionCorrectaEvent.emit(opcion);
-      });
+      );
+      resultado
+        .toPromise()
+        .then((opcion) => indicecsIncorrectosResponse.push(opcion));
+    });
+    return indicecsIncorrectosResponse;
+  }
+  async getOpcionCorrecta() {
+    const preguntaCorrecta: Preguntados = {};
+    const url = `https://imdb-api.com/en/API/Name/k_uvngshml/nm${this.indiceRandom}`;
+    // const url = `http://localhost:3000/actores/${this.indiceRandom}`;
 
-    // const pregunta: Preguntados = {
-    //   urlImg:
-    //     'https://static.wikia.nocookie.net/doblaje/images/7/71/Jackblack.jpg/revision/latest/top-crop/width/360/height/450?cb=20140715053129&path-prefix=es',
-    //   opcionCorrecta: 'Jack Black',
-    //   opcionesIncorrectas: ['Peter Lanzani', 'Susana Gimenez', 'Micky Mouse'],
-    // };
-    // this.preguntaEnJuego = pregunta;
-    // console.log(this.preguntaEnJuego);
+    let resultado = this.http.get<any>(url).pipe(
+      map((response) => {
+        let pregunta = {
+          urlImg: response.image,
+          opcionCorrecta: response.name,
+        };
+        return pregunta;
+      })
+    );
+    resultado.toPromise().then((opcion) => {
+      preguntaCorrecta.urlImg = opcion.urlImg;
+      preguntaCorrecta.opcionCorrecta = opcion.opcionCorrecta;
+    });
+    return preguntaCorrecta;
   }
 }
 /**Genera un numero aleatorio, pudiendo indicar un numero a evitar */
@@ -95,10 +95,10 @@ function generarNumeroRandom(numeroAEvitar: any = null) {
       random = Math.floor(Math.random() * (Math.random() * decimales));
     }
     return generarIdValido(random);
-    //return random;
+    // return random;
   }
   return generarIdValido(random);
-  //return random;
+  // return random;
 }
 function generarIdValido(numero: number) {
   let arrayNumero = numero.toString();

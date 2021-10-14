@@ -1,18 +1,11 @@
-<app-juego-preguntados-inicio
-  (empezarAJugarEvent)="onEmpezarAJugar()"
-  *ngIf="juegoTerminado == undefined"
-></app-juego-preguntados-inicio>
 <app-juego-preguntados-container
-  *ngIf="!rondaTerminada && !juegoTerminado"
+  *ngIf="!juegoTerminado"
   (userLoseEvent)="onUserLose($event)"
-  [rondaTerminada]="rondaTerminada"
-  (rondaTerminadaEvent)="onRondaTerminada($event)"
-></app-juego-preguntados-container>
+>
+</app-juego-preguntados-container>
 <app-juego-preguntados-resultados
-  [userResultado]="resultadoDelJuego"
-  (proximaPreguntaEvent)="onProximaPreguntaEvent()"
+  *ngIf="juegoTerminado"
+  [userResultado]="resultadoDelJuego!"
   (playAgainEvent)="onPlayAgain()"
-  [juegoTerminado]="juegoTerminado"
-  [rondaTerminada]="rondaTerminada"
-  *ngIf="rondaTerminada || juegoTerminado"
-></app-juego-preguntados-resultados>
+>
+</app-juego-preguntados-resultados>

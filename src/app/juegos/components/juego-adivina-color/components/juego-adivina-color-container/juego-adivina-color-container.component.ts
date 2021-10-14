@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { AdivinaColorResultados } from '../../services/adivina-color-resultados';
 import { AdivinaColorService } from '../../services/adivina-color.service';
 import { Color } from '../../services/color';
